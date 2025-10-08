@@ -48,6 +48,9 @@ const products = ref([])
 const loading = ref(true)
 const fetchError = ref(null)
 const selectedFile = ref(null)
+import { v4 as uuidv4 } from 'uuid'
+
+
 
 // 選擇檔案
 const handleFile = (event) => {
@@ -138,9 +141,10 @@ const getImgUrl = async (id) => {
 
 // 上傳檔案(成功)
 const uploadFile = async (file) => {
+  const randomFileName = `${uuidv4()}.jpg`
   const { data, error } = await supabase.storage
     .from('products-images')
-    .upload(file.name, file) // 第一個參數是檔名，第二個是 File 物件
+    .upload(randomFileName, file) // 第一個參數是檔名，第二個是 File 物件
   if (error) console.error('上傳失敗', error)
   else console.log('上傳成功', data)
   return { data, error }
@@ -207,10 +211,7 @@ const deleteFile = async (fileName) => {
   }
 }
 
-// 刪除 1.jpg
-deleteFile('1.jpg')
-
-
+deleteFile("1.jpg") // 測試刪除檔案
 
 const refreshFiles = async () => {
   const res = await listFiles('')
@@ -224,15 +225,7 @@ const refreshFiles = async () => {
   files.value = res.data ?? []
 }
 
-// 印出 session / user（確認你是 anon 還是 authenticated）
-const s = await supabase.auth.getSession()
-console.log('session', s)
-const u = await supabase.auth.getUser()
-console.log('user', u)
-
-const res = await supabase.storage.from('products-images').list('')
-console.log(res) // data 或 error
-
+refreshFiles()
 
 
 // 範例：使用 <input type="file">
@@ -250,6 +243,21 @@ onMounted(async () => {
     const data = await getProducts()
     products.value = data ?? []
     console.log('products', products.value)
+    // 取得 session/user 與列出 bucket 檔案（安全地在生命週期內呼叫）
+    try {
+      const s = await supabase.auth.getSession()
+      console.log('session', s)
+      const u = await supabase.auth.getUser()
+      console.log('user', u)
+    } catch (e) {
+      console.warn('get session/user failed (likely no session)', e)
+    }
+
+    try {
+      await refreshFiles()
+    } catch (e) {
+      console.warn('refreshFiles failed', e)
+    }
   } catch (err) {
     console.error('Failed to load products', err)
     fetchError.value = err?.message || String(err)
