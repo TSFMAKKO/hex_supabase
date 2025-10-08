@@ -15,7 +15,10 @@
   <div>
     <input type="file" @change="handleFile" />
     <button @click="upload">上傳</button>
+    <img src="" id="myImg" alt="">
+    <button @click="refreshFiles">列出檔案</button>
   </div>
+
   <div v-if="loading">載入中…</div>
   <div v-else>
     <div v-if="fetchError" class="error">發生錯誤：{{ fetchError }}</div>
@@ -51,7 +54,7 @@ const handleFile = (event) => {
   selectedFile.value = event.target.files?.[0] ?? null
 }
 
-// 上傳檔案
+// 上傳檔案(成功)
 // 如果檔案名稱重複，可以加 { upsert: true } 覆蓋現有檔案：
 // .upload(selectedFile.value.name, selectedFile.value, { upsert: true })
 
@@ -68,6 +71,7 @@ const handleFile = (event) => {
 //   else console.log('上傳成功', data)
 // }
 
+// ✅ Read - 讀取商品列表
 const getProducts = async () => {
   const { data, error } = await supabase
     .from('products')
@@ -108,24 +112,13 @@ const deleteProduct = async (id) => {
 }
 
 
-// 公開讀取
+// 公開讀取(成功)
 // const { data } = supabase.storage
 //   .from('products-images')
-//   .getPublicUrl('phone.jpg')
+//   .getPublicUrl('1.jpg')
 
 // console.log(data.publicUrl) // 可直接用於 <img> 或 fetch
 
-// 私人讀取
-// const { data, error } = await supabase.storage
-//   .from('products-images')
-//   .createSignedUrl('phone.jpg', 60) // 60 秒有效
-
-// if (!error) {
-//   const url = data.signedUrl
-//   console.log(url)
-//   // 可直接顯示
-//   document.getElementById('myImg').src = url
-// }
 
 
 // 讀取檔案
@@ -143,8 +136,7 @@ const getImgUrl = async (id) => {
 
 }
 
-// 上傳檔案
-// 上傳檔案
+// 上傳檔案(成功)
 const uploadFile = async (file) => {
   const { data, error } = await supabase.storage
     .from('products-images')
@@ -190,16 +182,57 @@ const upload = async () => {
 // 覆蓋檔案(更新檔案)
 // await supabase.storage.from('products-images').upload('phone.jpg', newFile, { upsert: true })
 
-const deleteFile = async (fileName) => {
+
+// 列出 bucket 裡的檔案（方便確認 key）
+const listFiles = async (path = '') => {
   const { data, error } = await supabase.storage
     .from('products-images')
-    .remove([fileName]) // 傳陣列
-  if (error) console.error('刪除失敗', error)
-  else console.log('刪除成功', data)
+    .list(path)
+  if (error) {
+    console.error('listFiles error', error)
+    return { data: null, error }
+  }
+  return { data, error: null }
 }
 
-// 範例
-// deleteFile('phone.jpg')
+const deleteFile = async (fileName) => {
+  const { data, error } = await supabase.storage
+    .from('products-images')  // bucket 名稱
+    .remove([fileName])       // 傳陣列，即使只刪一個檔案
+
+  if (error) {
+    console.error('刪除失敗', error)
+  } else {
+    console.log('刪除成功', data)
+  }
+}
+
+// 刪除 1.jpg
+deleteFile('1.jpg')
+
+
+
+const refreshFiles = async () => {
+  const res = await listFiles('')
+  if (res.error) {
+    console.error('refreshFiles error', res.error)
+    alert(`列出檔案失敗：${res.error.message ?? res.error}`)
+    return
+  }
+  console.log('listFiles', res.data);
+  
+  files.value = res.data ?? []
+}
+
+// 印出 session / user（確認你是 anon 還是 authenticated）
+const s = await supabase.auth.getSession()
+console.log('session', s)
+const u = await supabase.auth.getUser()
+console.log('user', u)
+
+const res = await supabase.storage.from('products-images').list('')
+console.log(res) // data 或 error
+
 
 
 // 範例：使用 <input type="file">
