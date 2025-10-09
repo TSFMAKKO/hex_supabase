@@ -94,36 +94,65 @@ const editHandler = (p) => {
 
 const saveHandler = async (p) => {
   // await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
-  const imgName = p.image_path?.split('/').pop() ?? ''
-  console.log("imgName", imgName);
+  let randomName = ""
+  // 先判斷 selectedFile 是否有東西
+  if (!selectedFile.value) {
+    // 沒有就直接更新文字
+    // 修改資料表
+    await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: p.image_path })
 
-  // 先刪除圖片
-  deleteFile(imgName)
-  // 上傳(修改)圖片(用隨機id之後再修改資料表)
-  const randomName = uuidv4() + '.jpg'
-  console.log("randomName", randomName);
+  } else {
+    const imgName = p.image_path?.split('/').pop() ?? ''
+    console.log("imgName", imgName);
 
-  upload(randomName)
+    // 先刪除圖片
+    deleteFile(imgName)
+    // 上傳(修改)圖片(用隨機id之後再修改資料表)
+    randomName = uuidv4() + '.jpg'
+    console.log("randomName", randomName);
+    upload(randomName)
+    // 修改資料表
+    await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: `products-images/${randomName}` })
 
-  // 修改資料表
-  await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: `products-images/${randomName}` })
+
+  }
+
+
+
+
 
 
 
   // setTimeout(() => {
-    // 修改前端
-    products.value = products.value.map(item => {
-      if (item.id === p.id) {
-        //  src: `${imgBaseUrl}/${imgName}`
-        return {
+  // 修改前端(有修改圖片的話)
+  // if (selectedFile.value) {
+  products.value = products.value.map(item => {
+    if (item.id === p.id) {
+      //  src: `${imgBaseUrl}/${imgName}`
+
+      let obj = {
+        id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
+        image_path: p.image_path,
+        src: p.src,
+        isEdit: false
+      }
+
+
+      if (selectedFile.value) {
+        obj = {
           id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
           image_path: `${randomName}`,
           src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
           isEdit: false
         }
       }
-      return item
-    })
+
+      return obj
+    }
+    return item
+  })
+  // }
+
 
 
   // }, 2000);
