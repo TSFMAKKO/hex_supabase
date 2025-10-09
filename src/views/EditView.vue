@@ -28,18 +28,15 @@
             </div>
             <div>
               <!-- 編輯按鈕 -->
-              <button type="button" @click="() => { p.isEdit = true }">編輯</button>
+              <button type="button" @click="editHandler(p)">編輯</button>
               <!-- 刪除按鈕 -->
               <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
             </div>
           </template>
           <template v-else>
-            <input type="text" v-model="p.title" />
-            <input type="number" v-model="p.price" />
-            <button type="button" @click="async () => {
-              await updateProduct(p.id, p.title, p.price)
-              p.isEdit = false
-            }">儲存</button>
+            <input type="text" v-model="tempEdit.title" />
+            <input type="number" v-model="tempEdit.price" />
+            <button type="button" @click="saveHandler(p)">儲存</button>
             <button type="button" @click="() => { p.isEdit = false }">取消</button>
 
           </template>
@@ -66,7 +63,39 @@ const loading = ref(true)
 const fetchError = ref(null)
 const selectedFile = ref(null)
 const files = ref([])
+
+const tempEdit = ref({})
 import { v4 as uuidv4 } from 'uuid'
+
+
+// 編輯
+const editHandler = (p) => {
+  p.isEdit = true
+  tempEdit.value = { ...p }
+  console.log("tempEdit:", tempEdit.value);
+
+
+}
+
+  // 修改前端
+  // 把資料撈出來
+  // products.value = products.value.map(item => {
+  //   if (item.id === p.id) {
+  //     return { ...tempEdit, isEdit: false }
+  //   }
+  //   return item
+  // })
+
+const saveHandler = async (p) => {
+  await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
+  // 修改前端
+  products.value = products.value.map(item => {
+    if (item.id === p.id) {
+      return { ...tempEdit.value, isEdit: false }
+    }
+    return item
+  })
+}
 
 // 刪除
 const delHandler = async (image_path, id) => {
