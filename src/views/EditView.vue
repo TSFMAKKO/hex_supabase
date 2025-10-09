@@ -71,15 +71,23 @@ const selectedFile = ref(null)
 const files = ref([])
 
 const tempEdit = ref({})
+const EditId = ref('')
 import { v4 as uuidv4 } from 'uuid'
 
 
 // 編輯
 const editHandler = (p) => {
+  console.log("products", products.value);
+
+  // 取消所有 isEdit 狀態
+  products.value.forEach(item => item.isEdit = false)
+
+
   p.isEdit = true
   tempEdit.value = { ...p }
   console.log("tempEdit:", tempEdit.value);
 
+  EditId.value = p.id
 
 }
 
