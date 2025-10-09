@@ -12,12 +12,6 @@
 
 <template>
   <h1>Product</h1>
-  <div>
-    <input type="file" @change="handleFile" />
-    <button @click="upload">上傳</button>
-    <img src="" id="myImg" alt="">
-    <button @click="refreshFiles">列出檔案</button>
-  </div>
 
   <div v-if="loading">載入中…</div>
   <div v-else>
@@ -30,7 +24,6 @@
           <div>價格：{{ p.price }}</div>
           <div>
             <img :src="p.image_path" :alt="p.image_path" srcset="">
-            <!-- {{ p.image_path }} -->
           </div>
         </li>
       </ul>
