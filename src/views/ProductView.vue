@@ -26,11 +26,11 @@
       <div v-if="products.length === 0">目前沒有產品。</div>
       <ul class="products-list">
         <li v-for="p in products" :key="p.id" class="product">
-          <strong>{{ p.title }}</strong>
+          <strong>標題:{{ p.title }}</strong>
           <div>價格：{{ p.price }}</div>
-          <div>圖片
-            <img :src="p.image_path" alt="" srcset="">
-            {{ p.image_path }}
+          <div>
+            <img :src="p.image_path" :alt="p.image_path" srcset="">
+            <!-- {{ p.image_path }} -->
           </div>
         </li>
       </ul>

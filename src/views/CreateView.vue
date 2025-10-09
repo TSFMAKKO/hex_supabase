@@ -13,6 +13,8 @@
 <template>
   <h1>Create</h1>
   <div>
+    <input type="text" placeholder="title" v-model="title" />
+    <input type="price" placeholder="price" v-model="price" />
     <input type="file" @change="handleFile" />
     <button @click="upload">上傳</button>
     <img src="" id="myImg" alt="">
@@ -31,6 +33,9 @@ const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
 // TODO: move this to env in production
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2anBnaWptamJwYmh3cXJodnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MTEzNzQsImV4cCI6MjA3NTQ4NzM3NH0.tmrOcck492sPMmddYpBBNqSQXey2os17tfKSVwLcT5I"
 const supabase = createClient(supabaseUrl, supabaseKey)
+
+const title = ref('')
+const price = ref(0)
 
 const products = ref([])
 const loading = ref(true)
@@ -172,7 +177,7 @@ const upload = async () => {
       const imgFullPath = res.data?.fullPath ?? ''
       console.log('imgFullPath', imgFullPath);
       // 寫入資料庫
-      await addProduct('圖片上傳測試', 20000, imgFullPath)
+      await addProduct(title.value, price.value, imgFullPath)
 
 
 
