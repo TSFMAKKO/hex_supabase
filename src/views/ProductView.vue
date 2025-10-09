@@ -11,7 +11,7 @@
 </style>
 
 <template>
-  <h1>About Page</h1>
+  <h1>Product</h1>
   <div>
     <input type="file" @change="handleFile" />
     <button @click="upload">上傳</button>
@@ -26,8 +26,12 @@
       <div v-if="products.length === 0">目前沒有產品。</div>
       <ul class="products-list">
         <li v-for="p in products" :key="p.id" class="product">
-          <strong>{{ p.name }}</strong>
+          <strong>{{ p.title }}</strong>
           <div>價格：{{ p.price }}</div>
+          <div>圖片
+            <img :src="p.image_path" alt="" srcset="">
+            {{ p.image_path }}
+          </div>
         </li>
       </ul>
     </div>
@@ -48,6 +52,7 @@ const products = ref([])
 const loading = ref(true)
 const fetchError = ref(null)
 const selectedFile = ref(null)
+const files = ref([])
 import { v4 as uuidv4 } from 'uuid'
 
 
@@ -125,6 +130,7 @@ const deleteProduct = async (id) => {
 
 
 // 讀取檔案
+// // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
 const getImgUrl = async (id) => {
   const { data, error } = await supabase.storage
@@ -221,7 +227,7 @@ const refreshFiles = async () => {
     return
   }
   console.log('listFiles', res.data);
-  
+
   files.value = res.data ?? []
 }
 
@@ -242,6 +248,15 @@ onMounted(async () => {
   try {
     const data = await getProducts()
     products.value = data ?? []
+    // 處理圖片路徑
+    const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
+    products.value = products.value.map(p => {
+      return {
+        ...p,
+        image_path: `${imgBaseUrl}/${p.image_path}`
+      }
+    })
+
     console.log('products', products.value)
     // 取得 session/user 與列出 bucket 檔案（安全地在生命週期內呼叫）
     try {
