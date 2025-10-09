@@ -23,7 +23,7 @@
           <strong>標題:{{ p.title }}</strong>
           <div>價格：{{ p.price }}</div>
           <div>
-            <img :src="p.image_path" :alt="p.image_path" srcset="">
+            <img :key="p.src" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
           </div>
         </li>
       </ul>
@@ -246,7 +246,7 @@ onMounted(async () => {
     products.value = products.value.map(p => {
       return {
         ...p,
-        image_path: `${imgBaseUrl}/${p.image_path}`
+        src: `${imgBaseUrl}/${p.image_path}`
       }
     })
 

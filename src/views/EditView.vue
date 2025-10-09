@@ -26,7 +26,7 @@
             <div>
               <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
        -->
-              <img :key="p.src" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
+              <img :key="p.src" :src="p.src" :alt="p.src" srcset="">
             </div>
             <div>
               <!-- 編輯按鈕 -->
@@ -62,6 +62,7 @@ const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
 // TODO: move this to env in production
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2anBnaWptamJwYmh3cXJodnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MTEzNzQsImV4cCI6MjA3NTQ4NzM3NH0.tmrOcck492sPMmddYpBBNqSQXey2os17tfKSVwLcT5I"
 const supabase = createClient(supabaseUrl, supabaseKey)
+const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
 
 const products = ref([])
 const loading = ref(true)
@@ -92,21 +93,41 @@ const editHandler = (p) => {
 // })
 
 const saveHandler = async (p) => {
-  await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
+  // await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
   const imgName = p.image_path?.split('/').pop() ?? ''
   console.log("imgName", imgName);
 
   // 先刪除圖片
   deleteFile(imgName)
-  // 上傳(修改)圖片
-  upload(imgName)
-  // 修改前端
-  products.value = products.value.map(item => {
-    if (item.id === p.id) {
-      return { ...tempEdit.value, isEdit: false }
-    }
-    return item
-  })
+  // 上傳(修改)圖片(用隨機id之後再修改資料表)
+  const randomName = uuidv4() + '.jpg'
+  console.log("randomName", randomName);
+
+  upload(randomName)
+
+  // 修改資料表
+  await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: `products-images/${randomName}` })
+
+
+
+  // setTimeout(() => {
+    // 修改前端
+    products.value = products.value.map(item => {
+      if (item.id === p.id) {
+        //  src: `${imgBaseUrl}/${imgName}`
+        return {
+          id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
+          image_path: `${randomName}`,
+          src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
+          isEdit: false
+        }
+      }
+      return item
+    })
+
+
+  // }, 2000);
+
 }
 
 // 刪除
@@ -116,7 +137,7 @@ const delHandler = async (image_path, id) => {
   // 取出檔名（支援 path/filename.jpg 或 直接 filename.jpg）
   const imgName = image_path?.split('/').pop() ?? ''
   console.log("imgName", imgName);
-  
+
   if (!imgName) {
     alert('找不到圖片名稱，無法刪除')
     return
@@ -189,10 +210,10 @@ const addProduct = async (title, price) => {
 }
 
 // ✅ Update - 更新商品名稱與價格
-const updateProduct = async (id, title, price) => {
+const updateProduct = async ({ id, title, price, image_path }) => {
   const { data, error } = await supabase
     .from('products')
-    .update({ title, price })
+    .update({ title, price, image_path })
     .eq('id', id)
   if (error) throw error
   return data
@@ -250,7 +271,7 @@ const uploadFile = async (file, name) => {
 }
 
 // 對應 template 的上傳按鈕：呼叫上面的 uploadFile helper
-const upload = async (name) => {
+const upload = async (name, id) => {
   if (!selectedFile.value) {
     alert('請先選擇檔案')
     return
@@ -275,6 +296,19 @@ const upload = async (name) => {
       alert(`上傳失敗：${res.error.message ?? JSON.stringify(res.error)}`)
     } else {
       alert('上傳完成 (測試)')
+      selectedFile.value = null
+      // 清空 input[type=file] 的值（可選）
+      // document.querySelector('input[type="file"]').value = ''
+
+      // src: `${imgBaseUrl}/${imgName}`
+      // products.value = products.value.map(item => {
+      //   if (item.id === id) {
+      //     item.src = `${imgBaseUrl}/${name}?t=${Date.now()}`
+      //     return item
+      //   }
+      //   return item
+      // })
+      // console.log("products.value", products.value);
     }
   } catch (e) {
     console.error('upload handler error', e)
@@ -346,7 +380,6 @@ onMounted(async () => {
     const data = await getProducts()
     products.value = data ?? []
     // 處理圖片路徑
-    const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
     products.value = products.value.map(p => {
       return {
         ...p,
