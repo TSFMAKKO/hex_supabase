@@ -11,7 +11,13 @@
 </style>
 
 <template>
-  <h1>Product</h1>
+  <h1>About Page</h1>
+  <div>
+    <input type="file" @change="handleFile" />
+    <button @click="upload">上傳</button>
+    <img src="" id="myImg" alt="">
+    <button @click="refreshFiles">列出檔案</button>
+  </div>
 
   <div v-if="loading">載入中…</div>
   <div v-else>
@@ -20,33 +26,8 @@
       <div v-if="products.length === 0">目前沒有產品。</div>
       <ul class="products-list">
         <li v-for="p in products" :key="p.id" class="product">
-          <template v-if="p?.isEdit === false || p?.isEdit === undefined">
-            <strong>標題:{{ p.title }}</strong>
-            <div>價格：{{ p.price }}</div>
-            <div>
-              <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
-       -->
-              <img :key="p.src" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
-            </div>
-            <div>
-              <!-- 編輯按鈕 -->
-              <button type="button" @click="editHandler(p)">編輯</button>
-              <!-- 刪除按鈕 -->
-              <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
-            </div>
-          </template>
-          <template v-else>
-            <input type="text" v-model="tempEdit.title" />
-            <input type="number" v-model="tempEdit.price" />
-            <!--  -->
-            <input type="file" @change="handleFile" />
-            <!-- <button @click="upload">更換新圖片</button> -->
-            <button type="button" @click="saveHandler(p)">儲存</button>
-            <button type="button" @click="() => { p.isEdit = false }">取消</button>
-
-          </template>
-
-
+          <strong>{{ p.name }}</strong>
+          <div>價格：{{ p.price }}</div>
         </li>
       </ul>
     </div>
@@ -67,84 +48,9 @@ const products = ref([])
 const loading = ref(true)
 const fetchError = ref(null)
 const selectedFile = ref(null)
-const files = ref([])
-
-const tempEdit = ref({})
 import { v4 as uuidv4 } from 'uuid'
 
 
-// 編輯
-const editHandler = (p) => {
-  p.isEdit = true
-  tempEdit.value = { ...p }
-  console.log("tempEdit:", tempEdit.value);
-
-
-}
-
-// 修改前端
-// 把資料撈出來
-// products.value = products.value.map(item => {
-//   if (item.id === p.id) {
-//     return { ...tempEdit, isEdit: false }
-//   }
-//   return item
-// })
-
-const saveHandler = async (p) => {
-  await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
-  const imgName = p.image_path?.split('/').pop() ?? ''
-  console.log("imgName", imgName);
-
-  // 先刪除圖片
-  deleteFile(imgName)
-  // 上傳(修改)圖片
-  upload(imgName)
-  // 修改前端
-  products.value = products.value.map(item => {
-    if (item.id === p.id) {
-      return { ...tempEdit.value, isEdit: false }
-    }
-    return item
-  })
-}
-
-// 刪除
-const delHandler = async (image_path, id) => {
-  if (!confirm('確定要刪除？')) return
-
-  // 取出檔名（支援 path/filename.jpg 或 直接 filename.jpg）
-  const imgName = image_path?.split('/').pop() ?? ''
-  console.log("imgName", imgName);
-  
-  if (!imgName) {
-    alert('找不到圖片名稱，無法刪除')
-    return
-  }
-
-  try {
-    // 刪除圖檔（await 必要）
-    const { data: delData, error: delErr } = await deleteFile(imgName)
-    if (delErr) {
-      console.error('刪除檔案失敗', delErr)
-      alert(`刪除檔案失敗：${delErr.message ?? delErr}`)
-      return
-    }
-
-    // 刪除檔案
-    deleteFile(imgName)
-    // 刪除 product 資料
-    await deleteProduct(id)
-
-    // 更新列表
-    products.value = products.value.filter(item => item.id !== id)
-
-    alert('刪除成功')
-  } catch (e) {
-    console.error('delHandler error', e)
-    alert(`刪除發生錯誤：${e?.message ?? e}`)
-  }
-}
 
 // 選擇檔案
 const handleFile = (event) => {
@@ -198,10 +104,7 @@ const updateProduct = async (id, title, price) => {
   return data
 }
 
-// 抓取product 圖庫位置
-// 刪除圖庫 假如回傳成功
-// 繼續刪除product 表單資料(用id)
-// ✅ Delete - 刪除商品(procut表單)
+// ✅ Delete - 刪除商品
 const deleteProduct = async (id) => {
   const { data, error } = await supabase
     .from('products')
@@ -222,7 +125,6 @@ const deleteProduct = async (id) => {
 
 
 // 讀取檔案
-// // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
 const getImgUrl = async (id) => {
   const { data, error } = await supabase.storage
@@ -239,11 +141,11 @@ const getImgUrl = async (id) => {
 
 // 上傳檔案(成功)
 const uploadFile = async (file, name) => {
-  // 不能用隨機名子 要用原先的名子
+  // 要用原本的檔名
   // const randomFileName = `${uuidv4()}.jpg`
   const { data, error } = await supabase.storage
     .from('products-images')
-    .upload(name, file, { upsert: true }) // 第一個參數是檔名，第二個是 File 物件 { upsert: true } 可複寫
+    .upload(name, file) // 第一個參數是檔名，第二個是 File 物件
   if (error) console.error('上傳失敗', error)
   else console.log('上傳成功', data)
   return { data, error }
@@ -264,7 +166,7 @@ const upload = async (name) => {
 
     if (!user) {
       // 未登入時詢問是否以匿名嘗試（僅測試用）
-      const ok = confirm('確定更換新圖片？')
+      const ok = confirm('未登入，是否以匿名方式嘗試上傳（測試用，正式環境請勿使用）？')
       if (!ok) return
     }
 
@@ -308,13 +210,9 @@ const deleteFile = async (fileName) => {
   } else {
     console.log('刪除成功', data)
   }
-
-  return { data, error }
 }
 
-// deleteFile("1.jpg") // 測試刪除檔案
-// deleteFile("1.jpg") // 測試刪除檔案
-
+deleteFile("1.jpg") // 測試刪除檔案
 
 const refreshFiles = async () => {
   const res = await listFiles('')
@@ -345,15 +243,6 @@ onMounted(async () => {
   try {
     const data = await getProducts()
     products.value = data ?? []
-    // 處理圖片路徑
-    const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
-    products.value = products.value.map(p => {
-      return {
-        ...p,
-        src: `${imgBaseUrl}/${p.image_path}`
-      }
-    })
-
     console.log('products', products.value)
     // 取得 session/user 與列出 bucket 檔案（安全地在生命週期內呼叫）
     try {
