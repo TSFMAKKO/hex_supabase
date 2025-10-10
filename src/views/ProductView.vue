@@ -15,12 +15,17 @@
   <div class="flex w-full px-5 h-[80px] mb-[32px]">
     <div class="flex w-[1296px] m-0 mx-auto justify-between items-center">
       <div class="flex items-center">
-        <h1 class="text-[20px] font-[700] leading-[150%] font-mina tracking-[4.4%] mr-[48px]">URBNSTEP</h1>
-        <div class="flex max-sm:hidden font-noto">
+        <h1 class="mr-[48px]">
+          <!-- text-[20px] font-[700] leading-[150%] font-mina tracking-[4.4%] -->
+          <img src="../assets/logo.svg" alt="">
+        </h1>
+        <div class="flex max-sm:hidden font-noto text-[#212529]">
           <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[5%] font-noto">
-            產品列表</p>
+            <a href="">商品列表</a>
+          </p>
           <p class=" font-[500] text-[16px] font-noto leading-[150%] tracking-[5%]">
-            品牌故事</p>
+            <a href="">品牌故事</a>
+          </p>
 
         </div>
       </div>
@@ -32,19 +37,19 @@
   </div>
 
   <div class="flex w-full px-5 mb-[24px]">
-    <div class="flex w-[1296px] m-0 mx-auto gap-[12px] ">
+    <div class="flex w-[1296px] m-0 mx-auto gap-[12px] text-[#6C757D]">
       <span>首頁</span>
       <span>/</span>
       <span>女鞋</span>
       <span>/</span>
-      <span>所有產品</span>
+      <span class="text-[#343A40]">所有產品</span>
     </div>
 
   </div>
 
 
   <div class="flex w-full px-5 mb-[24px]">
-    <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[5%] ">
+    <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[5%] text-[#212529]">
       女鞋
     </div>
   </div>
@@ -54,8 +59,8 @@
   <div class="flex w-full px-5 mb-[24px]">
     <div class="flex w-[1296px] m-0 mx-auto gap-[24px]">
       <div
-        class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[5%]">
-        <div class="h-[48px] w-[172px] flex items-center leading-[150%] font-[500] text-[16px] tracking-[5%]">所有產品</div>
+        class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[5%] text-[#212529]">
+        <div class="h-[48px] w-[172px] flex items-center text-[#57A203]">所有產品</div>
         <div class="h-[48px] w-[172px] flex items-center">慢跑鞋</div>
         <div class="h-[48px] w-[172px] flex items-center">滑板鞋</div>
         <div class="h-[48px] w-[172px] flex items-center">後底鞋</div>
@@ -106,13 +111,15 @@
 
           </li>
         </ul>
-        <div class="flex justify-center items-center gap-x-[8px] font-[400]" v-if="products.length > 0 " >
+        <div class="flex justify-center items-center gap-x-[8px] font-[400] text-[#212529] leading-[150%]" v-if="products.length > 0">
           <a href="">
             <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
           </a>
-          <a href="" class="p-[12px] block">1</a>
-          <a href="" class="p-[12px] block">2</a>
-          <a href="" class="p-[12px] block">3</a>
+          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center bg-[#C0FA73]">1</a>
+          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center ">2</a>
+          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">3</a>
+          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">...</a>
+          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">10</a>
           <a href="">
             <img class="w-[20px] h-[20px]" src="../assets/right.png" alt="" srcset=""></img>
           </a>
@@ -142,9 +149,9 @@
   </div>
 
   <!--  -->
-  <div
-    class="w-full px-[12px] ">
-    <div class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px]  text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
+  <div class="w-full px-[12px] ">
+    <div
+      class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px]  text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
       <div class="mt-[32px] mb-[4px] ">Copyright ©2025 URBNSTYLE</div>
       <div class="">All Rights Reserved.</div>
     </div>

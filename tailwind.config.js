@@ -5,6 +5,8 @@ export default defineConfig({
     extend: {
       fontFamily: {
         noto: ['"Noto Sans TC"', 'sans-serif'],
+        mina: ['"Mina"', 'sans-serif'],
+        
       },
 
       colors: {
