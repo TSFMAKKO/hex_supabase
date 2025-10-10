@@ -106,18 +106,27 @@
 
           </li>
         </ul>
-        <div class="flex justify-center gap-x-[8px]">
-          <img src="../assets/left.png" alt="" srcset="">
-          <a href="" class="p-[12px]">1</a>
-          <a href="" class="p-[12px]">2</a>
-          <a href="" class="p-[12px]">3</a>
-          <img src="../assets/right.png" alt="" srcset=""></img>
+        <div class="flex justify-center items-center gap-x-[8px]">
+          <a href="">
+            <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
+          </a>
+          <a href="" class="p-[12px] block">1</a>
+          <a href="" class="p-[12px] block">2</a>
+          <a href="" class="p-[12px] block">3</a>
+          <a href="">
+            <img class="w-[20px] h-[20px]" src="../assets/right.png" alt="" srcset=""></img>
+          </a>
         </div>
         <!-- </div> -->
         <!-- </div> -->
 
       </div>
     </div>
+  </div>
+
+  <div class="flex w-full justify-center items-center gap-x-[24px] h-[96px] bg-[#E8FEC5]">
+    <div class="flex text-[24px] font-[700] leading-[120%] tracking-[5%]">加入會員取得 9 折優惠</div>
+    <div><a class="black px-[24px] py-[12px] bg-[#212529] text-[#FFFFFF] rounded-[4px]" href="">馬上註冊</a></div>
   </div>
 
   <div class="flex w-full px-5 mb-[24px] ">
@@ -132,11 +141,14 @@
     </div>
   </div>
 
-
+  <!--  -->
   <div
-    class="border-t border-t-[#DEE2E6] w-[1296px] mx-auto mb-[50px] text-[14px] text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
-    <div class="mt-[32px] mb-[4px] ">Copyright ©2025 URBNSTYLE</div>
-    <div class="">All Rights Reserved.</div>
+    class="w-full px-[12px] ">
+    <div class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px] text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
+      <div class="mt-[32px] mb-[4px] ">Copyright ©2025 URBNSTYLE</div>
+      <div class="">All Rights Reserved.</div>
+    </div>
+
   </div>
 
 
