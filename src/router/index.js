@@ -1,7 +1,7 @@
 
 import { createRouter, createWebHistory } from 'vue-router';
 import Index from '../views/Index.vue';
-import Edit from '../views/EditView.vue';
+import Test from '../views/TestView.vue';
 import Product from '../views/ProductView.vue';
 import Create from '../views/CreateView.vue';
 
@@ -12,9 +12,9 @@ const routes = [
     component: Index,
   },
   {
-    path: '/edit',
-    name: 'Edit',
-    component: Edit,
+    path: '/test',
+    name: 'Test',
+    component: Test,
   },
   {
     path: '/product',

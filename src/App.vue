@@ -2,9 +2,9 @@
   <div id="app">
     <nav>
       <router-link to="/">Index</router-link> |
-      <router-link to="/edit">Edit</router-link> |
+      <router-link to="/product">Product</router-link> |
       <router-link to="/create">Create</router-link> |
-      <router-link to="/product">Product</router-link>
+      <router-link to="/test">Test</router-link> 
     </nav>
     <router-view />
   </div>
