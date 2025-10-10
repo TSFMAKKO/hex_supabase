@@ -24,8 +24,7 @@
             <strong>標題:{{ p.title }}</strong>
             <div>價格：{{ p.price }}</div>
             <div>
-              <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
-       -->
+              <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
               <img :key="p.src" :src="p.src" :alt="p.src" srcset="">
             </div>
             <div>
@@ -38,6 +37,7 @@
           <template v-else>
             <input type="text" v-model="tempEdit.title" />
             <input type="number" v-model="tempEdit.price" />
+            <img :src="tempEdit.src" :alt="tempEdit.src" srcset="">
             <!--  -->
             <input type="file" @change="handleFile" />
             <!-- <button @click="upload">更換新圖片</button> -->
@@ -59,7 +59,9 @@ import { ref, onMounted } from 'vue'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
-// TODO: move this to env in production
+// 實務上不建議把 key 放在前端
+// 建議放在後端或 serverless functions
+// 這裡用 supabaseKey 只是為了示範
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2anBnaWptamJwYmh3cXJodnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MTEzNzQsImV4cCI6MjA3NTQ4NzM3NH0.tmrOcck492sPMmddYpBBNqSQXey2os17tfKSVwLcT5I"
 const supabase = createClient(supabaseUrl, supabaseKey)
 const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
@@ -91,14 +93,6 @@ const editHandler = (p) => {
 
 }
 
-// 修改前端
-// 把資料撈出來
-// products.value = products.value.map(item => {
-//   if (item.id === p.id) {
-//     return { ...tempEdit, isEdit: false }
-//   }
-//   return item
-// })
 
 const saveHandler = async (p) => {
   // await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
@@ -131,10 +125,9 @@ const saveHandler = async (p) => {
 
 
 
-  // setTimeout(() => {
   // 修改前端(有修改圖片的話)
   // if (selectedFile.value) {
-  products.value = products.value.map(item => {
+  products.value = products.value.map( (item) => {
     if (item.id === p.id) {
       //  src: `${imgBaseUrl}/${imgName}`
 
@@ -145,25 +138,26 @@ const saveHandler = async (p) => {
         isEdit: false
       }
 
-
+      // const imgPath = await getImgUrl(`${randomName}`)
       if (selectedFile.value) {
         obj = {
           id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
           image_path: `${randomName}`,
           src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
+          // src2: `${imgPath}?t=${Date.now()}`,
           isEdit: false
         }
       }
+
+      console.log("obj", obj);
 
       return obj
     }
     return item
   })
-  // }
 
 
 
-  // }, 2000);
 
 }
 
@@ -282,10 +276,10 @@ const deleteProduct = async (id) => {
 // 讀取檔案
 // // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
-const getImgUrl = async (id) => {
+const getImgUrl = async (path) => {
   const { data, error } = await supabase.storage
     .from('products-images')
-    .createSignedUrl(`${id}.jpg`, 60)
+    .createSignedUrl(`${path}`, 60)
 
   if (!error) {
     const url = data.signedUrl
@@ -294,6 +288,7 @@ const getImgUrl = async (id) => {
   }
 
 }
+
 
 // 上傳檔案(成功)
 const uploadFile = async (file, name) => {
@@ -383,7 +378,6 @@ const deleteFile = async (fileName) => {
   return { data, error }
 }
 
-// deleteFile("1.jpg") // 測試刪除檔案
 // deleteFile("1.jpg") // 測試刪除檔案
 
 

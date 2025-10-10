@@ -37,7 +37,9 @@ import { ref, onMounted } from 'vue'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
-// TODO: move this to env in production
+// 實務上不建議把 key 放在前端
+// 建議放在後端或 serverless functions
+// 這裡用 supabaseKey 只是為了示範
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2anBnaWptamJwYmh3cXJodnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MTEzNzQsImV4cCI6MjA3NTQ4NzM3NH0.tmrOcck492sPMmddYpBBNqSQXey2os17tfKSVwLcT5I"
 const supabase = createClient(supabaseUrl, supabaseKey)
 
