@@ -20,10 +20,10 @@
           <img src="../assets/logo.svg" alt="">
         </h1>
         <div class="flex max-sm:hidden font-noto text-[#212529]">
-          <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[5%] font-noto">
+          <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[0.8px] font-noto">
             <a href="">商品列表</a>
           </p>
-          <p class=" font-[500] text-[16px] font-noto leading-[150%] tracking-[5%]">
+          <p class=" font-[500] text-[16px] font-noto leading-[150%] tracking-[0.8px]">
             <a href="">品牌故事</a>
           </p>
 
@@ -49,7 +49,7 @@
 
 
   <div class="flex w-full px-5 mb-[24px]">
-    <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[5%] text-[#212529]">
+    <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[1.4px] text-[#212529]">
       女鞋
     </div>
   </div>
@@ -59,7 +59,7 @@
   <div class="flex w-full px-5 mb-[24px]">
     <div class="flex w-[1296px] m-0 mx-auto gap-[24px]">
       <div
-        class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[5%] text-[#212529]">
+        class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[0.8px] text-[#212529]">
         <div class="h-[48px] w-[172px] flex items-center text-[#57A203]">所有產品</div>
         <div class="h-[48px] w-[172px] flex items-center">慢跑鞋</div>
         <div class="h-[48px] w-[172px] flex items-center">滑板鞋</div>
@@ -67,7 +67,9 @@
         <div class="h-[48px] w-[172px] flex items-center">限定 / 聯名企劃</div>
 
       </div>
-      <div class="max-w-[1076px] mb-[80px]">
+
+      <div v-if="loading">載入中…</div>
+      <div v-else class="max-w-[1076px] mb-[80px]">
         <!-- <div class="flex w-[33.3%]">aaa</div> -->
         <!-- <div v-if="loading">載入中…</div> -->
         <!-- <div v-else> -->
@@ -111,7 +113,8 @@
 
           </li>
         </ul>
-        <div class="flex justify-center items-center gap-x-[8px] font-[400] text-[#212529] leading-[150%]" v-if="products.length > 0">
+        <div class="flex justify-center items-center gap-x-[8px] font-[400] text-[#212529] leading-[150%]"
+          v-if="products.length > 0">
           <a href="">
             <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
           </a>
@@ -131,21 +134,25 @@
     </div>
   </div>
 
-  <div class="flex w-full justify-center items-center gap-x-[24px] h-[96px] bg-[#E8FEC5] mb-[64px]">
-    <div class="flex text-[24px] font-[700] leading-[120%] tracking-[5%]">加入會員取得 9 折優惠</div>
-    <div><a class="black px-[24px] py-[12px] bg-[#212529] text-[#FFFFFF] rounded-[4px]" href="">馬上註冊</a></div>
+  <div class="flex w-full justify-center items-center gap-x-[24px] h-[96px] bg-[#E8FEC5] mb-[64px] px-[24px]">
+    <div class="flex text-[24px] max-sm:text-[20px] font-[700] font-noto leading-[120%] tracking-[1.2px] max-sm:tracking-[1px]">加入會員取得 9 折優惠</div>
+    <div class="">
+      <a class="flex justify-center max-xs:text-[red] px-[16px] py-[8px] bg-[#212529] text-[#FFFFFF] rounded-[4px] hover:bg-[#495057] focus:bg-[#495057] xs:text-[10px]"
+        href="">馬上註冊
+      </a>
+    </div>
   </div>
 
   <div class="flex w-full px-5 ">
     <div
       class="flex max-sm:items-start max-sm:flex-col h-[48px] items-center justify-between w-[1296px] m-0 mx-auto max-sm:gap-y-[8px] ">
-      <div class="text-[28px] font-[700] leading-[120%] tracking-[5%] py-[8px] px-[12px]">
+      <div class="text-[28px] font-[700] leading-[120%] tracking-[1.4px] py-[8px] px-[12px]">
         <img src="../assets/logo.svg" alt="" srcset="">
       </div>
       <div
-        class="flex max-sm:flex-col gap-x-[40px] max-sm:gap-y-[4px] text-[16px] font-[500] leading-[150%] tracking-[5%] px-[12px]">
+        class="flex max-sm:flex-col gap-x-[40px] max-sm:gap-y-[4px] text-[16px] font-[500] leading-[150%] tracking-[0.8px] px-[12px]">
         <div class="w-full text-left">商品列表</div>
-        <div class=" w-full text-left mb-[24px] ">品牌故事</div>
+        <div class="w-full text-left mb-[24px] ">品牌故事</div>
       </div>
     </div>
   </div>
@@ -153,7 +160,7 @@
   <!--  -->
   <div class="w-full px-[12px] ">
     <div
-      class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px]  text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
+      class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px]  text-[#6C757D] leading-[150%] font-[400] tracking-[0.7px] text-center">
       <div class="mt-[32px] mb-[4px] ">Copyright ©2025 URBNSTYLE</div>
       <div class="">All Rights Reserved.</div>
     </div>

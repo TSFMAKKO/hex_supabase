@@ -41,12 +41,12 @@
   <input
     type="file"
     @change="handleFile"
-    class="w-full px-4 py-2 border border-gray-300 rounded-md file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-[#E8FEC5] file:text-[#064e3b] "
+    class="w-full px-4 py-2 border border-gray-300 rounded-md file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-[#E8FEC5] file:text-[#064e3b] hover:file:bg-[#064e3b] hover:file:text-[#E8FEC5] "
   />
 
   <button
     @click="upload"
-    class="w-full bg-[#E8FEC5] text-[#06413b] py-2 rounded-md  transition"
+    class="w-full bg-[#E8FEC5] text-[#06413b] hover:bg-[#06413b] hover:text-[#E8FEC5] py-2 rounded-md  transition"
   >
     上傳
   </button>
