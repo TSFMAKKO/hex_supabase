@@ -12,7 +12,6 @@
 
 <template>
   <h1>Product</h1>
-
   <div v-if="loading">載入中…</div>
   <div v-else>
     <div v-if="fetchError" class="error">發生錯誤：{{ fetchError }}</div>
@@ -20,11 +19,33 @@
       <div v-if="products.length === 0">目前沒有產品。</div>
       <ul class="products-list">
         <li v-for="p in products" :key="p.id" class="product">
-          <strong>標題:{{ p.title }}</strong>
-          <div>價格：{{ p.price }}</div>
-          <div>
-            <img :key="p.src" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">
-          </div>
+          <template v-if="p?.isEdit === false || p?.isEdit === undefined">
+            <strong>標題:{{ p.title }}</strong>
+            <div>價格：{{ p.price }}</div>
+            <div class="">
+              <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
+              <img :key="p.src" :src="p.src" :alt="p.src" srcset="">
+            </div>
+            <div>
+              <!-- 編輯按鈕 -->
+              <button type="button" @click="editHandler(p)">編輯</button>
+              <!-- 刪除按鈕 -->
+              <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
+            </div>
+          </template>
+          <template v-else>
+            <input type="text" v-model="tempEdit.title" />
+            <input type="number" v-model="tempEdit.price" />
+            <img :src="tempEdit.src" :alt="tempEdit.src" srcset="">
+            <!--  -->
+            <input type="file" @change="handleFile" />
+            <!-- <button @click="upload">更換新圖片</button> -->
+            <button type="button" @click="saveHandler(p)">儲存</button>
+            <button type="button" @click="() => { p.isEdit = false }">取消</button>
+
+          </template>
+
+
         </li>
       </ul>
     </div>
@@ -42,15 +63,138 @@ const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
 // 這裡用 supabaseKey 只是為了示範
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2anBnaWptamJwYmh3cXJodnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MTEzNzQsImV4cCI6MjA3NTQ4NzM3NH0.tmrOcck492sPMmddYpBBNqSQXey2os17tfKSVwLcT5I"
 const supabase = createClient(supabaseUrl, supabaseKey)
+const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
 
 const products = ref([])
 const loading = ref(true)
 const fetchError = ref(null)
 const selectedFile = ref(null)
 const files = ref([])
+
+const tempEdit = ref({})
+const EditId = ref('')
 import { v4 as uuidv4 } from 'uuid'
 
 
+// 編輯
+const editHandler = (p) => {
+  console.log("products", products.value);
+
+  // 取消所有 isEdit 狀態
+  products.value.forEach(item => item.isEdit = false)
+
+
+  p.isEdit = true
+  tempEdit.value = { ...p }
+  console.log("tempEdit:", tempEdit.value);
+
+  EditId.value = p.id
+
+}
+
+
+const saveHandler = async (p) => {
+  // await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
+  let randomName = ""
+  // 先判斷 selectedFile 是否有東西
+  if (!selectedFile.value) {
+    // 沒有就直接更新文字
+    // 修改資料表
+    await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: p.image_path })
+
+  } else {
+    const imgName = p.image_path?.split('/').pop() ?? ''
+    console.log("imgName", imgName);
+
+    // 先刪除圖片
+    deleteFile(imgName)
+    // 上傳(修改)圖片(用隨機id之後再修改資料表)
+    randomName = uuidv4() + '.jpg'
+    console.log("randomName", randomName);
+    upload(randomName)
+    // 修改資料表
+    await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: `products-images/${randomName}` })
+
+
+  }
+
+
+
+
+
+
+
+  // 修改前端(有修改圖片的話)
+  // if (selectedFile.value) {
+  products.value = products.value.map((item) => {
+    if (item.id === p.id) {
+      //  src: `${imgBaseUrl}/${imgName}`
+
+      let obj = {
+        id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
+        image_path: p.image_path,
+        src: p.src,
+        isEdit: false
+      }
+
+      // const imgPath = await getImgUrl(`${randomName}`)
+      if (selectedFile.value) {
+        obj = {
+          id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
+          image_path: `${randomName}`,
+          src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
+          // src2: `${imgPath}?t=${Date.now()}`,
+          isEdit: false
+        }
+      }
+
+      console.log("obj", obj);
+
+      return obj
+    }
+    return item
+  })
+
+
+
+
+}
+
+// 刪除
+const delHandler = async (image_path, id) => {
+  if (!confirm('確定要刪除？')) return
+
+  // 取出檔名（支援 path/filename.jpg 或 直接 filename.jpg）
+  const imgName = image_path?.split('/').pop() ?? ''
+  console.log("imgName", imgName);
+
+
+  try {
+    // 刪除圖檔（await 必要）
+    const { data: delData, error: delErr } = await deleteFile(imgName)
+    if (delErr) {
+      console.error('刪除檔案失敗', delErr)
+      alert(`刪除檔案失敗：${delErr.message ?? delErr}`)
+      return
+    }
+
+    console.log('刪除檔案成功', delData)
+
+    if (!error) {
+      // 刪除 product 資料
+      await deleteProduct(id)
+
+      // 更新列表
+      products.value = products.value.filter(item => item.id !== id)
+
+      alert('刪除成功')
+    }
+
+  } catch (e) {
+    console.error('delHandler error', e)
+    alert(`刪除發生錯誤：${e?.message ?? e}`)
+  }
+}
 
 // 選擇檔案
 const handleFile = (event) => {
@@ -95,16 +239,19 @@ const addProduct = async (title, price) => {
 }
 
 // ✅ Update - 更新商品名稱與價格
-const updateProduct = async (id, title, price) => {
+const updateProduct = async ({ id, title, price, image_path }) => {
   const { data, error } = await supabase
     .from('products')
-    .update({ title, price })
+    .update({ title, price, image_path })
     .eq('id', id)
   if (error) throw error
   return data
 }
 
-// ✅ Delete - 刪除商品
+// 抓取product 圖庫位置
+// 刪除圖庫 假如回傳成功
+// 繼續刪除product 表單資料(用id)
+// ✅ Delete - 刪除商品(procut表單)
 const deleteProduct = async (id) => {
   const { data, error } = await supabase
     .from('products')
@@ -127,10 +274,10 @@ const deleteProduct = async (id) => {
 // 讀取檔案
 // // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
-const getImgUrl = async (id) => {
+const getImgUrl = async (path) => {
   const { data, error } = await supabase.storage
     .from('products-images')
-    .createSignedUrl(`${id}.jpg`, 60)
+    .createSignedUrl(`${path}`, 60)
 
   if (!error) {
     const url = data.signedUrl
@@ -140,19 +287,21 @@ const getImgUrl = async (id) => {
 
 }
 
+
 // 上傳檔案(成功)
-const uploadFile = async (file) => {
-  const randomFileName = `${uuidv4()}.jpg`
+const uploadFile = async (file, name) => {
+  // 不能用隨機名子 要用原先的名子
+  // const randomFileName = `${uuidv4()}.jpg`
   const { data, error } = await supabase.storage
     .from('products-images')
-    .upload(randomFileName, file) // 第一個參數是檔名，第二個是 File 物件
+    .upload(name, file, { upsert: true }) // 第一個參數是檔名，第二個是 File 物件 { upsert: true } 可複寫
   if (error) console.error('上傳失敗', error)
   else console.log('上傳成功', data)
   return { data, error }
 }
 
 // 對應 template 的上傳按鈕：呼叫上面的 uploadFile helper
-const upload = async () => {
+const upload = async (name, id) => {
   if (!selectedFile.value) {
     alert('請先選擇檔案')
     return
@@ -166,17 +315,30 @@ const upload = async () => {
 
     if (!user) {
       // 未登入時詢問是否以匿名嘗試（僅測試用）
-      const ok = confirm('未登入，是否以匿名方式嘗試上傳（測試用，正式環境請勿使用）？')
+      const ok = confirm('確定更換新圖片？')
       if (!ok) return
     }
 
-    const res = await uploadFile(selectedFile.value)
+    const res = await uploadFile(selectedFile.value, name)
     // uploadFile 會在發生 error 時在 console.log，這裡回傳結果以便測試
     if (res?.error) {
       console.error('上傳失敗', res.error)
       alert(`上傳失敗：${res.error.message ?? JSON.stringify(res.error)}`)
     } else {
       alert('上傳完成 (測試)')
+      selectedFile.value = null
+      // 清空 input[type=file] 的值（可選）
+      // document.querySelector('input[type="file"]').value = ''
+
+      // src: `${imgBaseUrl}/${imgName}`
+      // products.value = products.value.map(item => {
+      //   if (item.id === id) {
+      //     item.src = `${imgBaseUrl}/${name}?t=${Date.now()}`
+      //     return item
+      //   }
+      //   return item
+      // })
+      // console.log("products.value", products.value);
     }
   } catch (e) {
     console.error('upload handler error', e)
@@ -210,9 +372,12 @@ const deleteFile = async (fileName) => {
   } else {
     console.log('刪除成功', data)
   }
+
+  return { data, error }
 }
 
-deleteFile("1.jpg") // 測試刪除檔案
+// deleteFile("1.jpg") // 測試刪除檔案
+
 
 const refreshFiles = async () => {
   const res = await listFiles('')
@@ -244,7 +409,6 @@ onMounted(async () => {
     const data = await getProducts()
     products.value = data ?? []
     // 處理圖片路徑
-    const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
     products.value = products.value.map(p => {
       return {
         ...p,
