@@ -11,7 +11,79 @@
 </style>
 
 <template>
-  <h1>Product</h1>
+  <!-- <h1>Edit</h1> -->
+  <div class="flex w-full px-5 h-[80px] mb-[32px]">
+    <div class="flex w-[1296px] m-0 mx-auto justify-between items-center">
+      <div class="flex items-center">
+        <h1 class="text-[20px] font-[700] leading-[150%] font-mina tracking-[4.4%] mr-[48px]">URBNSTEP</h1>
+        <div class="flex max-sm:hidden">
+          <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[5%]">
+            產品列表</p>
+          <p class=" font-[500] text-[16px] font-noto leading-[150%] tracking-[5%]">
+            品牌故事</p>
+
+        </div>
+      </div>
+      <div>
+        <img src="../assets/Vector.svg" alt="" srcset="">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="flex w-full px-5 mb-[24px]">
+    <div class="flex w-[1296px] m-0 mx-auto gap-[12px] ">
+      <span>首頁</span>
+      <span>/</span>
+      <span>女鞋</span>
+      <span>/</span>
+      <span>所有產品</span>
+    </div>
+
+  </div>
+
+
+  <div class="flex w-full px-5 mb-[24px]">
+    <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[5%] ">
+      女鞋
+    </div>
+  </div>
+
+  <!--  -->
+  <!-- text-[28px] font-[700] leading-[120%] tracking-[5%] -->
+  <div class="flex w-full px-5 mb-[24px]">
+    <div class="flex w-[1296px] m-0 mx-auto gap-[24px]">
+      <div class="w-[196px]">左</div>
+      <div class="">右</div>
+    </div>
+  </div>
+
+  <div class="flex w-full px-5 mb-[24px] ">
+    <div
+      class="flex max-sm:flex-col h-[48px] items-center justify-between w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[5%] ">
+      <div>URBNSTEP</div>
+      <div class="flex max-sm:flex-col gap-[40px]">
+        <div>商品列表</div>
+        <div>品牌故事</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex w-full justify-center items-center px-5 mb-[24px]">
+    <!-- 內層用 max-w，讓它在大螢幕限制寬度，小螢幕能縮小 -->
+    <div
+      class="flex max-sm:flex-col h-[48px] items-center justify-between w-full max-w-[1296px] text-[28px] font-[700] leading-[120%] tracking-[5%]">
+      <div>URBNSTEP</div>
+      <div class="flex max-sm:flex-col gap-[40px]">
+        <div>商品列表</div>
+        <div>品牌故事</div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
   <div v-if="loading">載入中…</div>
   <div v-else>
@@ -127,7 +199,7 @@ const saveHandler = async (p) => {
 
   // 修改前端(有修改圖片的話)
   // if (selectedFile.value) {
-  products.value = products.value.map( (item) => {
+  products.value = products.value.map((item) => {
     if (item.id === p.id) {
       //  src: `${imgBaseUrl}/${imgName}`
 
@@ -169,10 +241,6 @@ const delHandler = async (image_path, id) => {
   const imgName = image_path?.split('/').pop() ?? ''
   console.log("imgName", imgName);
 
-  if (!imgName) {
-    alert('找不到圖片名稱，無法刪除')
-    return
-  }
 
   try {
     // 刪除圖檔（await 必要）
@@ -183,15 +251,18 @@ const delHandler = async (image_path, id) => {
       return
     }
 
-    // 刪除檔案
-    deleteFile(imgName)
-    // 刪除 product 資料
-    await deleteProduct(id)
+    console.log('刪除檔案成功', delData)
 
-    // 更新列表
-    products.value = products.value.filter(item => item.id !== id)
+    if (!error) {
+      // 刪除 product 資料
+      await deleteProduct(id)
 
-    alert('刪除成功')
+      // 更新列表
+      products.value = products.value.filter(item => item.id !== id)
+
+      alert('刪除成功')
+    }
+
   } catch (e) {
     console.error('delHandler error', e)
     alert(`刪除發生錯誤：${e?.message ?? e}`)
