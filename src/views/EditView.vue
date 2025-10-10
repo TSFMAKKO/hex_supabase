@@ -53,34 +53,87 @@
   <!-- text-[28px] font-[700] leading-[120%] tracking-[5%] -->
   <div class="flex w-full px-5 mb-[24px]">
     <div class="flex w-[1296px] m-0 mx-auto gap-[24px]">
-      <div class="w-[196px]">左</div>
-      <div class="">右</div>
+      <div class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden">
+        <div class="h-[48px] w-[172px] flex items-center">所有產品</div>
+        <div class="h-[48px] w-[172px] flex items-center">慢跑鞋</div>
+        <div class="h-[48px] w-[172px] flex items-center">滑板鞋</div>
+        <div class="h-[48px] w-[172px] flex items-center">後底鞋</div>
+        <div class="h-[48px] w-[172px] flex items-center">限定 / 聯名企劃</div>
+
+      </div>
+      <div class="max-w-[1076px]">
+        <!-- <div class="flex w-[33.3%]">aaa</div> -->
+        <!-- <div v-if="loading">載入中…</div> -->
+        <!-- <div v-else> -->
+        <!-- <div v-if="fetchError" class="error">發生錯誤：{{ fetchError }}</div> -->
+        <!-- <div v-else> -->
+        <!-- <div v-if="products.length === 0">目前沒有產品。</div> -->
+        <ul
+          class="products-list flex flex-wrap gap-x-[24px] max-sm:gap-x-[12px] gap-y-[48px] max-sm:gap-y-[24px] !mt-[0px] mb-[48px]">
+          <li v-for="p in products" :key="p.id" class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] flex flex-col justify-between">
+            <template v-if="p?.isEdit === false || p?.isEdit === undefined">
+              <div class="mb-[12px]">
+                <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
+                <img :key="p.src" :src="p.src" :alt="p.src" srcset="">
+              </div>
+              <div class="flex flex-col gap-y-[4px]">
+                <strong>{{ p.title }}</strong>
+                <div>NT${{ p.price.toLocaleString() }}</div>
+                 <div class="flex gap-x-[8px]">
+                <!-- 編輯按鈕 -->
+                <button type="button" @click="editHandler(p)">編輯</button>
+                <!-- 刪除按鈕 -->
+                <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
+              </div>
+              </div>
+
+             
+            </template>
+            <template v-else>
+              <input type="text" v-model="tempEdit.title" />
+              <input type="number" v-model="tempEdit.price" />
+              <img :src="tempEdit.src" :alt="tempEdit.src" srcset="">
+              <!--  -->
+              <input type="file" @change="handleFile" />
+              <!-- <button @click="upload">更換新圖片</button> -->
+              <button type="button" @click="saveHandler(p)">儲存</button>
+              <button type="button" @click="() => { p.isEdit = false }">取消</button>
+
+            </template>
+
+
+          </li>
+        </ul>
+        <div class="flex justify-center gap-x-[8px]">
+          <a href="" class="p-[12px]">1</a>
+          <a href="" class="p-[12px]">2</a>
+          <a href="" class="p-[12px]">3</a>
+
+        </div>
+        <!-- </div> -->
+        <!-- </div> -->
+
+      </div>
     </div>
   </div>
 
   <div class="flex w-full px-5 mb-[24px] ">
     <div
-      class="flex max-sm:flex-col h-[48px] items-center justify-between w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[5%] ">
-      <div>URBNSTEP</div>
-      <div class="flex max-sm:flex-col gap-[40px]">
-        <div>商品列表</div>
-        <div>品牌故事</div>
+      class="flex max-sm:items-start max-sm:flex-col h-[48px] items-center justify-between w-[1296px] m-0 mx-auto max-sm:gap-y-[8px] ">
+      <div class="text-[28px] font-[700] leading-[120%] tracking-[5%] py-[8px] px-[12px]">URBNSTEP</div>
+     <div class="flex max-sm:flex-col gap-x-[40px] max-sm:gap-y-[4px] text-[16px] font-[500] leading-[150%] tracking-[5%] px-[12px]">
+          <div class="w-full text-left">商品列表</div>
+        <div class=" w-full text-left">品牌故事</div>
       </div>
     </div>
   </div>
 
-  <div class="flex w-full justify-center items-center px-5 mb-[24px]">
-    <!-- 內層用 max-w，讓它在大螢幕限制寬度，小螢幕能縮小 -->
-    <div
-      class="flex max-sm:flex-col h-[48px] items-center justify-between w-full max-w-[1296px] text-[28px] font-[700] leading-[120%] tracking-[5%]">
-      <div>URBNSTEP</div>
-      <div class="flex max-sm:flex-col gap-[40px]">
-        <div>商品列表</div>
-        <div>品牌故事</div>
-      </div>
-    </div>
-  </div>
 
+  <div class="border-t w-[1296px] mx-auto mb-[50px] text-[14px] leading-[150%] font-[400] tracking-[5%] text-center">
+    <div class="mt-[32px] mb-[4px] ">1</div>
+    <div class="">2</div>
+  </div>
+ 
 
 
 
