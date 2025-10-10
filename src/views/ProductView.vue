@@ -16,8 +16,8 @@
     <div class="flex w-[1296px] m-0 mx-auto justify-between items-center">
       <div class="flex items-center">
         <h1 class="text-[20px] font-[700] leading-[150%] font-mina tracking-[4.4%] mr-[48px]">URBNSTEP</h1>
-        <div class="flex max-sm:hidden">
-          <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[5%]">
+        <div class="flex max-sm:hidden font-noto">
+          <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[5%] font-noto">
             產品列表</p>
           <p class=" font-[500] text-[16px] font-noto leading-[150%] tracking-[5%]">
             品牌故事</p>
@@ -79,7 +79,7 @@
                 <img class="w-full h-auto max-h-[260px] object-cover " :key="p.src" :src="p.src" :alt="p.src" srcset="">
               </div>
               <div class="flex flex-col gap-y-[4px]">
-                <strong>{{ p.title }}</strong>
+                <strong class="font-[700]">{{ p.title }}</strong>
                 <div>NT${{ p.price.toLocaleString() }}</div>
                 <div class="flex gap-x-[8px]">
                   <!-- 編輯按鈕 -->
@@ -106,7 +106,7 @@
 
           </li>
         </ul>
-        <div class="flex justify-center items-center gap-x-[8px]">
+        <div class="flex justify-center items-center gap-x-[8px] font-[400]" v-if="products.length > 0 " >
           <a href="">
             <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
           </a>
@@ -144,7 +144,7 @@
   <!--  -->
   <div
     class="w-full px-[12px] ">
-    <div class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px] text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
+    <div class="border-t border-t-[#DEE2E6] max-w-[1296px] mx-auto mb-[50px] text-[14px]  text-[#6C757D] leading-[150%] font-[400] tracking-[5%] text-center">
       <div class="mt-[32px] mb-[4px] ">Copyright ©2025 URBNSTYLE</div>
       <div class="">All Rights Reserved.</div>
     </div>
