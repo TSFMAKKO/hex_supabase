@@ -11,16 +11,48 @@
 </style>
 
 <template>
-  <h1>Create</h1>
-  <div>
+  <!-- <h1>Create</h1> -->
+  <!-- <div>
     <input type="text" placeholder="title" v-model="title" />
     <input type="price" placeholder="price" v-model="price" />
     <input type="file" @change="handleFile" />
     <button @click="upload">上傳</button>
     <img src="" id="myImg" alt="">
     <button @click="refreshFiles">列出檔案</button>
-  </div>
+  </div> -->
 
+<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md space-y-4">
+  <h2 class="text-xl font-semibold text-gray-800">新增商品</h2>
+
+  <input
+    type="text"
+    placeholder="商品名稱"
+    v-model="title"
+    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+
+  <input
+    type="number"
+    placeholder="價格"
+    v-model="price"
+    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+  />
+
+  <input
+    type="file"
+    @change="handleFile"
+    class="w-full px-4 py-2 border border-gray-300 rounded-md file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-[#E8FEC5] file:text-[#064e3b] "
+  />
+
+  <button
+    @click="upload"
+    class="w-full bg-[#E8FEC5] text-[#06413b] py-2 rounded-md  transition"
+  >
+    上傳
+  </button>
+  <img src="" id="myImg" alt="" class="w-full h-auto rounded-md border border-gray-200" />
+
+</div>
 
 </template>
 

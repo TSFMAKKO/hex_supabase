@@ -67,7 +67,7 @@
         <div class="h-[48px] w-[172px] flex items-center">限定 / 聯名企劃</div>
 
       </div>
-      <div class="max-w-[1076px]">
+      <div class="max-w-[1076px] mb-[80px]">
         <!-- <div class="flex w-[33.3%]">aaa</div> -->
         <!-- <div v-if="loading">載入中…</div> -->
         <!-- <div v-else> -->
@@ -131,19 +131,21 @@
     </div>
   </div>
 
-  <div class="flex w-full justify-center items-center gap-x-[24px] h-[96px] bg-[#E8FEC5]">
+  <div class="flex w-full justify-center items-center gap-x-[24px] h-[96px] bg-[#E8FEC5] mb-[64px]">
     <div class="flex text-[24px] font-[700] leading-[120%] tracking-[5%]">加入會員取得 9 折優惠</div>
     <div><a class="black px-[24px] py-[12px] bg-[#212529] text-[#FFFFFF] rounded-[4px]" href="">馬上註冊</a></div>
   </div>
 
-  <div class="flex w-full px-5 mb-[24px] ">
+  <div class="flex w-full px-5 ">
     <div
       class="flex max-sm:items-start max-sm:flex-col h-[48px] items-center justify-between w-[1296px] m-0 mx-auto max-sm:gap-y-[8px] ">
-      <div class="text-[28px] font-[700] leading-[120%] tracking-[5%] py-[8px] px-[12px]">URBNSTEP</div>
+      <div class="text-[28px] font-[700] leading-[120%] tracking-[5%] py-[8px] px-[12px]">
+        <img src="../assets/logo.svg" alt="" srcset="">
+      </div>
       <div
         class="flex max-sm:flex-col gap-x-[40px] max-sm:gap-y-[4px] text-[16px] font-[500] leading-[150%] tracking-[5%] px-[12px]">
         <div class="w-full text-left">商品列表</div>
-        <div class=" w-full text-left">品牌故事</div>
+        <div class=" w-full text-left mb-[24px] ">品牌故事</div>
       </div>
     </div>
   </div>

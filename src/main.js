@@ -5,3 +5,10 @@ import router from './router'
 import './input.css'
 
 createApp(App).use(router).mount('#app')
+
+
+router.afterEach((to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+})
