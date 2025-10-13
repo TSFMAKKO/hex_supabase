@@ -9,13 +9,15 @@
 
     <!-- <HeaderView /> -->
     <HeaderView />
-    <router-view />
+    <main class="px-5">
+      <router-view />
+    </main>
     <FooterView />
   </div>
 </template>
 
 <script setup>
-import { onMounted } from  'vue';
+import { onMounted } from 'vue';
 import HeaderView from './components/HeaderView.vue';
 import FooterView from './components/FooterView.vue';
 
@@ -33,6 +35,7 @@ body {
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 5%;
+  color: #212529
 }
 
 
