@@ -16,7 +16,11 @@
     <div class="flex w-[1296px] m-0 mx-auto gap-[12px] text-[#6C757D]">
       <span>首頁</span>
       <span>/</span>
-      <span>女鞋</span>
+      <span>
+        <span v-if="sex === 'women'">女</span>
+        <span v-else-if="sex === 'men'">男</span>
+        鞋</span>
+
       <span>/</span>
       <span class="text-[#343A40]">所有產品</span>
     </div>
@@ -24,94 +28,33 @@
   </div>
 
 
-  <div class="flex w-full px-5 mb-[24px]">
-    <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[1.4px] text-[#212529]">
-      女鞋
-    </div>
-  </div>
+  <!-- <div class="flex w-full px-5 mb-[24px]">
+        <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[1.4px] text-[#212529]">
+            女鞋
+        </div>
+    </div> -->
+  <ShoeGender />
 
   <!--  -->
   <!-- text-[28px] font-[700] leading-[120%] tracking-[5%] -->
   <div class="flex w-full px-5 mb-[24px]">
     <div class="flex w-[1296px] m-0 mx-auto gap-[24px]">
-      <div
-        class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[0.8px] text-[#212529]">
-        <div class="h-[48px] w-[172px] flex items-center text-[#57A203]">所有產品</div>
-        <div class="h-[48px] w-[172px] flex items-center">慢跑鞋</div>
-        <div class="h-[48px] w-[172px] flex items-center">滑板鞋</div>
-        <div class="h-[48px] w-[172px] flex items-center">後底鞋</div>
-        <div class="h-[48px] w-[172px] flex items-center">限定 / 聯名企劃</div>
+      <!-- <div
+                class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[0.8px] text-[#212529]">
+                <div class="h-[48px] w-[172px] flex items-center text-[#57A203]">所有產品</div>
+                <div class="h-[48px] w-[172px] flex items-center">慢跑鞋</div>
+                <div class="h-[48px] w-[172px] flex items-center">滑板鞋</div>
+                <div class="h-[48px] w-[172px] flex items-center">後底鞋</div>
+                <div class="h-[48px] w-[172px] flex items-center">限定 / 聯名企劃</div>
 
-      </div>
+            </div> -->
+      <ShoeType />
 
-      <div v-if="loading">載入中…</div>
-      <div v-else class="max-w-[1076px] mb-[50px] max-sm:mb-[16px]">
-        <!-- <div class="flex w-[33.3%]">aaa</div> -->
-        <!-- <div v-if="loading">載入中…</div> -->
-        <!-- <div v-else> -->
-        <!-- <div v-if="fetchError" class="error">發生錯誤：{{ fetchError }}</div> -->
-        <!-- <div v-else> -->
-        <!-- <div v-if="products.length === 0">目前沒有產品。</div> -->
-        <ul
-          class="products-list flex flex-wrap gap-x-[24px] max-sm:gap-x-[12px] gap-y-[48px] max-sm:gap-y-[24px] !mt-[0px] mb-[48px]">
-          <li v-for="p in products" :key="p.id"
-            class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] flex flex-col justify-between !border-b-0">
-            <template v-if="p?.isEdit === false || p?.isEdit === undefined">
-              <!-- <router-link :to="`/productDeteil/${p.id}`"> -->
-                <div class="mb-[12px] max-w-sm mx-auto ">
-                  <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
-                  <img class="w-full h-auto max-h-[260px] object-cover " :key="p.src" :src="p.src" :alt="p.src"
-                    srcset="">
-                </div>
-                <div class="flex flex-col gap-y-[4px]">
-                  <strong class="font-[700]">{{ p.title }}</strong>
-                  <div>NT${{ p.price.toLocaleString() }}</div>
-                  <div class="flex gap-x-[8px]">
-                    <router-link :to="`/productDeteil/${p.id}`">查看詳情</router-link>
-                    <!-- 編輯按鈕 -->
-                    <button type="button" @click="editHandler(p)">編輯</button>
-                    <!-- 刪除按鈕 -->
-                    <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
-                  </div>
-                </div>
-
-              <!-- </router-link> -->
-
-
-            </template>
-            <template v-else>
-              <img :src="tempEdit.src" :alt="tempEdit.src" srcset="">
-              <input type="text" v-model="tempEdit.title" />
-              <input type="number" v-model="tempEdit.price" />
-              <!--  -->
-              <input type="file" @change="handleFile" />
-              <!-- <button @click="upload">更換新圖片</button> -->
-              <button type="button" @click="saveHandler(p)">儲存</button>
-              <button type="button" @click="() => { p.isEdit = false }">取消</button>
-
-            </template>
-
-
-          </li>
-        </ul>
-        <div class="flex justify-center items-center gap-x-[8px] font-[400] text-[#212529] leading-[150%]"
-          v-if="products.length > 0">
-          <a href="">
-            <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
-          </a>
-          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center bg-[#C0FA73]">1</a>
-          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center ">2</a>
-          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">3</a>
-          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">...</a>
-          <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">10</a>
-          <a href="">
-            <img class="w-[20px] h-[20px]" src="../assets/right.png" alt="" srcset=""></img>
-          </a>
-        </div>
-        <!-- </div> -->
-        <!-- </div> -->
-
-      </div>
+      <All2View v-if="category === 'all'" />
+      <Running2View v-if="category === 'running'" />
+      <SkateboardingView v-if="category === 'skateboarding'" />
+      <LoafersView v-if="category === 'loafers'" />
+      <LimitedView v-if="category === 'limited'" />
     </div>
   </div>
 
@@ -123,9 +66,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+
+import { useRoute } from 'vue-router'
+import Running2View from './product/Running2View.vue'
+import All2View from './product/All2View.vue'
+import SkateboardingView from './product/SkateboardingView.vue'
+import LoafersView from './product/LoafersView.vue'
+import LimitedView from './product/LimitedView.vue'
+
+
+// const route = useRoute()
+// const lastSegment = route.path.split('/').pop()  // 'running'
+
+const route = useRoute()
+// console.log(route.params.id) 
+
+const sex = computed(() => route.params.sex || 'all')
+console.log('sex:', sex.value)
+
+const category = computed(() => route.params.category || 'all')
+console.log('category:', category.value)
+
+// console.log(`${route.params.sex} / ${route.params.category}`);
+
 // import { supabase } from './lib/supabase'
 import { createClient } from '@supabase/supabase-js'
+import ShoeType from '../components/product/ShoeType.vue'
+import ShoeGender from '../components/product/ShoeGender.vue'
 
 const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
 // 實務上不建議把 key 放在前端
@@ -144,6 +112,7 @@ const files = ref([])
 const tempEdit = ref({})
 const EditId = ref('')
 import { v4 as uuidv4 } from 'uuid'
+import router from '../router';
 
 
 // 編輯

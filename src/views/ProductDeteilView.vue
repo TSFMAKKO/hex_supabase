@@ -1,5 +1,7 @@
 <template>
-    <h1>ProductDeteilView id:{{ id }}</h1>
+    <div class="flex">
+        <h1 class="mx-auto">ProductDetailView id:{{ id }}</h1>
+    </div>
 </template>
 
 <script setup>
