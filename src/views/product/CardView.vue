@@ -12,7 +12,7 @@
 
 <template>
     <div v-if="loading">載入中…</div>
-    <div v-else class="max-w-[1076px] mb-[50px] max-sm:mb-[16px]">
+    <div v-else class="max-w-[1076px] w-full mb-[50px] max-sm:mb-[16px]">
         <!-- <div class="flex w-[33.3%]">aaa</div> -->
         <!-- <div v-if="loading">載入中…</div> -->
         <!-- <div v-else> -->
@@ -20,9 +20,11 @@
         <!-- <div v-else> -->
         <!-- <div v-if="products.length === 0">目前沒有產品。</div> -->
         <ul
-            class="products-list flex flex-wrap gap-x-[24px] max-sm:gap-x-[12px] gap-y-[48px] max-sm:gap-y-[24px] !mt-[0px] mb-[48px]">
+            class="products-list w-full flex content-stretch flex-wrap gap-x-[24px] max-sm:gap-x-[12px] gap-y-[48px] max-sm:gap-y-[24px] !mt-[0px] mb-[48px]">
             <li v-for="p in products" :key="p.id"
-                class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] flex flex-col justify-between !border-b-0">
+                class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] flex flex-col justify-end !border-b-0
+                
+                ">
                 <template v-if="p?.isEdit === false || p?.isEdit === undefined">
                     <!-- <router-link :to="`/productDeteil/${p.id}`"> -->
                     <div class="mb-[12px] max-w-sm mx-auto ">
