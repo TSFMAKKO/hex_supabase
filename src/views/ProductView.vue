@@ -57,20 +57,25 @@
           <li v-for="p in products" :key="p.id"
             class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] flex flex-col justify-between !border-b-0">
             <template v-if="p?.isEdit === false || p?.isEdit === undefined">
-              <div class="mb-[12px] max-w-sm mx-auto ">
-                <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
-                <img class="w-full h-auto max-h-[260px] object-cover " :key="p.src" :src="p.src" :alt="p.src" srcset="">
-              </div>
-              <div class="flex flex-col gap-y-[4px]">
-                <strong class="font-[700]">{{ p.title }}</strong>
-                <div>NT${{ p.price.toLocaleString() }}</div>
-                <div class="flex gap-x-[8px]">
-                  <!-- 編輯按鈕 -->
-                  <button type="button" @click="editHandler(p)">編輯</button>
-                  <!-- 刪除按鈕 -->
-                  <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
+              <!-- <router-link :to="`/productDeteil/${p.id}`"> -->
+                <div class="mb-[12px] max-w-sm mx-auto ">
+                  <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
+                  <img class="w-full h-auto max-h-[260px] object-cover " :key="p.src" :src="p.src" :alt="p.src"
+                    srcset="">
                 </div>
-              </div>
+                <div class="flex flex-col gap-y-[4px]">
+                  <strong class="font-[700]">{{ p.title }}</strong>
+                  <div>NT${{ p.price.toLocaleString() }}</div>
+                  <div class="flex gap-x-[8px]">
+                    <router-link :to="`/productDeteil/${p.id}`">查看詳情</router-link>
+                    <!-- 編輯按鈕 -->
+                    <button type="button" @click="editHandler(p)">編輯</button>
+                    <!-- 刪除按鈕 -->
+                    <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
+                  </div>
+                </div>
+
+              <!-- </router-link> -->
 
 
             </template>

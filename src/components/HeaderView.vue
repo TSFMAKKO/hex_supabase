@@ -4,14 +4,18 @@
             <div class="flex items-center">
                 <h1 class="mr-[48px]">
                     <!-- text-[20px] font-[700] leading-[150%] font-mina tracking-[4.4%] -->
-                    <img src="../assets/logo.svg" alt="">
+                    <router-link to="/">
+                        <img src="../assets/logo.svg" alt="">
+                    </router-link>
                 </h1>
                 <div class="flex max-sm:hidden font-noto text-[#212529]">
                     <p class="mr-[40px] font-[500] font-noto text-[16px] leading-[150%] tracking-[0.8px] font-noto">
-                        <a href="">商品列表</a>
+                        <!-- <a href="">商品列表</a> -->
+                        <router-link to="/product">商品列表</router-link>
                     </p>
                     <p class=" font-[500] text-[16px] font-noto leading-[150%] tracking-[0.8px]">
-                        <a href="">品牌故事</a>
+                        <!-- <a href="">品牌故事</a> -->
+                        <router-link to="/story">品牌故事</router-link>
                     </p>
 
                 </div>
