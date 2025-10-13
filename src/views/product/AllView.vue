@@ -100,7 +100,7 @@
                 <div class="flex justify-center items-center gap-x-[8px] font-[400] text-[#212529] leading-[150%]"
                     v-if="products.length > 0">
                     <a href="">
-                        <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
+                        <img class="w-[20px] h-[20px]" src="../../assets/left.png" alt="" srcset="">
                     </a>
                     <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center bg-[#C0FA73]">1</a>
                     <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center ">2</a>
@@ -108,7 +108,7 @@
                     <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">...</a>
                     <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">10</a>
                     <a href="">
-                        <img class="w-[20px] h-[20px]" src="../assets/right.png" alt="" srcset=""></img>
+                        <img class="w-[20px] h-[20px]" src="../../assets/right.png" alt="" srcset=""></img>
                     </a>
                 </div>
                 <!-- </div> -->

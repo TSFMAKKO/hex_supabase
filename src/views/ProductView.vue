@@ -50,11 +50,11 @@
             </div> -->
       <ShoeType />
 
-      <All2View v-if="category === 'all'" />
-      <Running2View v-if="category === 'running'" />
+      <All2View />
+      <!-- <Running2View v-if="category === 'running'" />
       <SkateboardingView v-if="category === 'skateboarding'" />
       <LoafersView v-if="category === 'loafers'" />
-      <LimitedView v-if="category === 'limited'" />
+      <LimitedView v-if="category === 'limited'" /> -->
     </div>
   </div>
 
@@ -71,9 +71,9 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Running2View from './product/Running2View.vue'
 import All2View from './product/All2View.vue'
-import SkateboardingView from './product/SkateboardingView.vue'
-import LoafersView from './product/LoafersView.vue'
-import LimitedView from './product/LimitedView.vue'
+// import SkateboardingView from './product/SkateboardingView.vue'
+// import LoafersView from './product/LoafersView.vue'
+// import LimitedView from './product/LimitedView.vue'
 
 
 // const route = useRoute()

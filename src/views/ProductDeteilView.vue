@@ -2,9 +2,9 @@
     <div class="flex">
         <h1 class="mx-auto">ProductDetailView id:{{ id }}</h1>
     </div>
-    <div class="flex justify-center max-sm:flex-col w-full gap-x-[24px] py-5">
-        <div class="w-[726px] max-sm:w-full">
-            <ul class="grid grid-cols-2 gap-[8px] max-sm:hidden">
+    <div class="flex justify-center max-md:flex-col w-full gap-x-[24px] py-5">
+        <div class="max-w-[726px] max-md:w-full">
+            <ul class="grid grid-cols-2 gap-[8px] max-md:hidden">
                 <li class="p-[56px] bg-gray-400">
                     <img src="https://picsum.photos/257/257" />
                 </li>
@@ -16,13 +16,13 @@
                 </li>
             </ul>
 
-             <ul class="grid grid-cols-1 gap-[8px] sm:hidden w-full">
+             <ul class="grid grid-cols-1 gap-[8px] md:hidden w-full">
                 <li class=" bg-gray-400 w-full">
                     <img class="w-full object-cover block" src="https://picsum.photos/500/500" />
                 </li>
             </ul>
         </div>
-        <div class="w-[526px] max-sm:w-full flex flex-col gap-y-[32px]">
+        <div class="max-w-[526px] max-md:w-full flex flex-col gap-y-[32px]">
             <section class="flex flex-col gap-y-[16px]">
 
                 <div>
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- 描述 -->
-                <div class="">
+                <div class="flex flex-col gap-y-[12px]">
                     <div class="">
                         Platform 404 以柔和奶白為底，搭配深藍色皮革點綴，走在街上自帶回頭率。鞋型採用復古運動風輪廓，結合輕量厚底與柔軟泡棉鞋舌，兼顧美感與舒適。
                     </div>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="flex flex-col gap-y-[8px]">
                     <div>尺寸</div>
-                    <div class="grid grid-cols-3 max-sm:grid-cols-2 gap-[8px]">
+                    <div class="grid grid-cols-3 max-md:grid-cols-2 gap-[8px]">
                         <div class="py-[12px] px-[24px] text-center border border-[#DEE2E6]">35(22.5cm)</div>
                         <div class="py-[12px] px-[24px] text-center border border-[#DEE2E6]">35(22.5cm)</div>
                         <div class="py-[12px] px-[24px] text-center border border-[#DEE2E6]">35(22.5cm)</div>
@@ -156,7 +156,7 @@
     <!-- <div class="mx-auto w-[1296px] grid grid-cols-1 gap-y-[16px] mb-[88px]">
         <div class="font-[700] text-[24px] leading-[1.2]">你可能也喜歡</div>
 
-        <div class="grid grid-cols-4 max-sm:grid-cols-1">
+        <div class="grid grid-cols-4 max-md:grid-cols-1">
             <div class="grid gap-y-[12px]">
                 <div><img src="https://picsum.photos/306/306" alt=""></div>
                 <div class="grid grid-rows-1 gap-y-[4px]">

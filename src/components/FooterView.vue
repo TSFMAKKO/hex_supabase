@@ -19,7 +19,7 @@
         <div class="flex max-sm:items-start max-sm:flex-col h-[48px] items-center justify-between w-[1296px]
        m-0 mx-auto  max-sm:mb-[132px] mb-[24px]">
             <div class="text-[28px] font-[700] leading-[120%] tracking-[1.4px] py-[8px] max-sm:mb-[8px]">
-                <img src="./assets/logo.svg" alt="" srcset="">
+                <img src="../assets/logo.svg" alt="" srcset="">
             </div>
             <div class="flex max-sm:flex-col gap-x-[40px] max-sm:gap-y-[4px] text-[16px] 
             font-[500] leading-[150%] 

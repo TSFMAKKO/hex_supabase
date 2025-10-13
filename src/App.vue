@@ -10,7 +10,7 @@
     <!-- <HeaderView /> -->
     <HeaderView />
     <main class="px-5">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </main>
     <FooterView />
   </div>

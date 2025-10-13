@@ -21,38 +21,41 @@
     <button @click="refreshFiles">列出檔案</button>
   </div> -->
 
-<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md space-y-4">
-  <h2 class="text-xl font-semibold text-gray-800">新增商品</h2>
+  <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md space-y-4">
+    <h2 class="text-xl font-semibold text-gray-800">新增商品</h2>
 
-  <input
-    type="text"
-    placeholder="商品名稱"
-    v-model="title"
-    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-  />
+    <input type="text" placeholder="商品名稱" v-model="title"
+      class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
-  <input
-    type="number"
-    placeholder="價格"
-    v-model="price"
-    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
-  />
+    <input type="number" placeholder="價格" v-model="price"
+      class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400" />
 
-  <input
-    type="file"
-    @change="handleFile"
-    class="w-full px-4 py-2 border border-gray-300 rounded-md file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-[#E8FEC5] file:text-[#064e3b] hover:file:bg-[#064e3b] hover:file:text-[#E8FEC5] "
-  />
+    <select v-model="gender" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+      <option value="men">男鞋</option>
+      <option value="women">女鞋</option>
+    </select>
 
-  <button
-    @click="upload"
-    class="w-full bg-[#E8FEC5] text-[#06413b] hover:bg-[#06413b] hover:text-[#E8FEC5] py-2 rounded-md  transition"
-  >
-    上傳
-  </button>
-  <img src="" id="myImg" alt="" class="w-full h-auto rounded-md border border-gray-200" />
 
-</div>
+
+
+    <select v-model="category" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+      <option value="running">慢跑鞋</option>
+      <option value="skateboarding">滑板鞋</option>
+      <option value="loafers">厚底鞋</option>
+      <option value="limited">限定 / 聯名</option>
+    </select>
+
+
+    <input type="file" @change="handleFile"
+      class="w-full px-4 py-2 border border-gray-300 rounded-md file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-md file:bg-[#E8FEC5] file:text-[#064e3b] hover:file:bg-[#064e3b] hover:file:text-[#E8FEC5] " />
+
+    <button @click="upload"
+      class="w-full bg-[#E8FEC5] text-[#06413b] hover:bg-[#06413b] hover:text-[#E8FEC5] py-2 rounded-md  transition">
+      上傳
+    </button>
+    <img src="" id="myImg" alt="" class="w-full h-auto rounded-md border border-gray-200" />
+
+  </div>
 
 </template>
 
@@ -68,6 +71,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 const title = ref('')
 const price = ref(0)
+const gender = ref('男')
+const category = ref('慢跑')
 
 const products = ref([])
 const loading = ref(true)
@@ -111,11 +116,19 @@ const getProducts = async () => {
 }
 
 
-// ✅ Create - 新增商品
-const addProduct = async (title, price, image_path) => {
+// ✅ Create - 新增商品 (加入 gender, category 欄位)
+const addProduct = async (title, price, image_path, gender, type) => {
+  const payload = { title, price }
+  if (image_path) payload.image_path = image_path
+  if (gender) payload.gender = gender
+  if (type) payload.type = type
+
+  console.log("payload:", payload);
+
+
   const { data, error } = await supabase
     .from('products')
-    .insert([{ title, price, image_path }])
+    .insert([payload])
   if (error) throw error
   return data
 }
@@ -208,8 +221,9 @@ const upload = async () => {
       // 取得圖片路徑
       const imgFullPath = res.data?.fullPath ?? ''
       console.log('imgFullPath', imgFullPath);
-      // 寫入資料庫
-      await addProduct(title.value, price.value, imgFullPath)
+      console.log('選項 gender, category', gender.value, category.value)
+      // 寫入資料庫 (包含 gender, category)
+      await addProduct(title.value, price.value, imgFullPath, gender.value, category.value)
 
 
 

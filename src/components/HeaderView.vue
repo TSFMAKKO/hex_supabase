@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div>
-                <img src="./assets/Vector.svg" alt="" srcset="">
+                <img src="../assets/Vector.svg" alt="" srcset="">
             </div>
         </div>
 

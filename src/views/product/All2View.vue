@@ -64,7 +64,7 @@
         <div class="flex justify-center items-center gap-x-[8px] font-[400] text-[#212529] leading-[150%]"
             v-if="products.length > 0">
             <a href="">
-                <img class="w-[20px] h-[20px]" src="../assets/left.png" alt="" srcset="">
+                <img class="w-[20px] h-[20px]" src="../../assets/left.png" alt="" srcset="">
             </a>
             <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center bg-[#C0FA73]">1</a>
             <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center ">2</a>
@@ -72,7 +72,7 @@
             <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">...</a>
             <a href="" class="p-[12px] w-[40px] h-[40px] flex justify-center items-center">10</a>
             <a href="">
-                <img class="w-[20px] h-[20px]" src="../assets/right.png" alt="" srcset=""></img>
+                <img class="w-[20px] h-[20px]" src="../../assets/right.png" alt="" srcset=""></img>
             </a>
         </div>
         <!-- </div> -->
@@ -82,7 +82,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 // import { supabase } from './lib/supabase'
 import { createClient } from '@supabase/supabase-js'
 import ShoeType from '../../components/product/ShoeType.vue'
@@ -105,6 +108,7 @@ const files = ref([])
 const tempEdit = ref({})
 const EditId = ref('')
 import { v4 as uuidv4 } from 'uuid'
+
 
 
 // 編輯
@@ -251,11 +255,23 @@ const handleFile = (event) => {
 
 // ✅ Read - 讀取商品列表
 const getProducts = async () => {
-    const { data, error } = await supabase
+    const query = supabase
         .from('products')
         .select('*')
-        .order('id', { ascending: false })
+        .eq('gender', route.params.sex)
+
+    if (route.params.category !== 'all') {
+        query.eq('type', route.params.category)
+    }
+
+    const { data, error } = await query.order('id', { ascending: false })
+
+
+
+
     if (error) throw error
+    console.log("讀取產品資料 data:", data);
+
     return data
 }
 
@@ -470,6 +486,11 @@ onMounted(async () => {
         loading.value = false
     }
 
+})
+
+
+watch(() => route.params.category, () => {
+    getProducts()
 })
 
 // 
