@@ -4,11 +4,25 @@
       <router-link to="/">Index</router-link> |
       <router-link to="/product">Product</router-link> |
       <router-link to="/create">Create</router-link> |
-      <router-link to="/test">Test</router-link> 
+      <router-link to="/test">Test</router-link>
     </nav>
+
+    <!-- <HeaderView /> -->
+    <HeaderView />
     <router-view />
+    <FooterView />
   </div>
 </template>
+
+<script setup>
+import { onMounted } from  'vue';
+import HeaderView from './components/HeaderView.vue';
+import FooterView from './components/FooterView.vue';
+
+
+</script>
+
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
