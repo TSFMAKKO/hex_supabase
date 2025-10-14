@@ -61,7 +61,7 @@ const collects = ref([
         size: '38',
         color: 'Navy',
         price: 2600,
-        img: 'https://picsum.photos/id/237/120/120'
+        img: '/hex_supabase/src/assets/product-10.png'
     },
     {
         id: 2,
@@ -69,7 +69,7 @@ const collects = ref([
         size: '38',
         color: 'White',
         price: 3200,
-        img: 'https://picsum.photos/id/1025/120/120'
+        img: '/hex_supabase/src/assets/product-11.png'
     },
     {
         id: 3,
@@ -77,7 +77,7 @@ const collects = ref([
         size: '38',
         color: 'Violet',
         price: 4000,
-        img: 'https://picsum.photos/id/1003/120/120'
+        img: '/hex_supabase/src/assets/product-10.png'
     },
 ])
 

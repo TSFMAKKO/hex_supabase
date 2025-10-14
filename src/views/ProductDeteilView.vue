@@ -2,23 +2,25 @@
     <div class="flex">
         <h1 class="mx-auto">ProductDetailView id:{{ id }}</h1>
     </div>
-    <div class="flex justify-center max-md:flex-col w-full gap-x-[24px] py-5">
-        <div class="max-w-[726px] max-md:w-full">
+    <div class="flex justify-center max-md:flex-col w-full gap-x-[24px]">
+        <div class="max-w-[746px] max-md:w-full">
+            <!-- 桌機版 -->
             <ul class="grid grid-cols-2 gap-[8px] max-md:hidden">
-                <li class="p-[56px] bg-gray-400">
-                    <img src="https://picsum.photos/257/257" />
+                <li class=" bg-gray-400">
+                    <img src="../assets/product-10.png" />
                 </li>
-                <li class="p-[56px] bg-gray-400">
-                    <img src="https://picsum.photos/257/257" />
+                <li class=" bg-gray-400">
+                    <img src="../assets/product-11.png" />
                 </li>
-                <li class="p-[56px] bg-gray-400">
-                    <img src="https://picsum.photos/257/257" />
+                <li class=" bg-gray-400">
+                    <img src="../assets/product-10.png" />
                 </li>
             </ul>
 
+            <!-- 手機板 -->
             <ul class="grid grid-cols-1 gap-[8px] md:hidden w-full">
                 <li class=" bg-gray-400 w-full">
-                    <img class="w-full object-cover block" src="https://picsum.photos/500/500" />
+                    <img class="w-full object-cover block" src="../assets/product-10.png" />
                 </li>
             </ul>
         </div>
@@ -81,14 +83,14 @@
                     <div class="flex gap-x-[8px]">
                         <div>
                             <div>
-                                <img src="https://picsum.photos/64/64" alt="">
+                                <img class="w-[64px]" src="../assets/product-10.png" alt="">
                             </div>
                             <div class="text-[#6C757D]">藍色</div>
                         </div>
 
                         <div>
                             <div>
-                                <img src="https://picsum.photos/64/64" alt="">
+                                <img class="w-[64px]" src="../assets/product-11.png" alt="">
                             </div>
                             <div class="text-[#6C757D]">卡其色</div>
                         </div>
@@ -175,7 +177,7 @@
             <!-- 讓小螢幕改為水平滑動的容器，避免撐破 body 寬度 -->
             <div class="w-full grid grid-cols-4 max-sm:flex max-sm:overflow-x-auto gap-x-[24px] max-sm:gap-x-[16px]">
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
-                    <div><img src="https://picsum.photos/306/306" alt=""></div>
+                    <div><img src="../assets/product-10.png" alt=""></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
                         <div class="title font-[700] leading-[1.2]">商品標題</div>
                         <div class="price">NT$ 2,999</div>
@@ -183,7 +185,7 @@
                 </div>
 
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
-                    <div><img src="https://picsum.photos/306/306" alt=""></div>
+                    <div><img src="../assets/product-11.png" alt=""></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
                         <div class="title font-[700] leading-[1.2]">商品標題</div>
                         <div class="price">NT$ 2,999</div>
@@ -191,7 +193,7 @@
                 </div>
 
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
-                    <div><img src="https://picsum.photos/306/306" alt=""></div>
+                    <div><img src="../assets/product-10.png" alt=""></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
                         <div class="title font-[700] leading-[1.2]">商品標題</div>
                         <div class="price">NT$ 2,999</div>
@@ -199,7 +201,7 @@
                 </div>
 
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
-                    <div><img src="https://picsum.photos/306/306" alt=""></div>
+                    <div><img src="../assets/product-10.png" alt=""></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
                         <div class="title font-[700] leading-[1.2]">商品標題</div>
                         <div class="price">NT$ 2,999</div>
