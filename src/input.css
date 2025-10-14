@@ -1,1 +1,279 @@
 @import "tailwindcss";
+
+/*
+	Tailwind v4 客製化入口
+	- 本檔案集中定義：設計色票(@theme)、字體樣式(@layer components)、間距/語意色/容器/水平滑動等工具(@layer utilities)
+	- 原則：盡量使用 Token（@theme 與 CSS 變數）→ 元件/工具使用 Token，方便全站統一調整
+	- 寫法提示：
+		• 直接用 token 顏色：bg-primary-400 / text-neutral-900 / border-neutral-300
+		• 使用變數括號值：p-[var(--spacing-m)]、gap-[var(--spacing-xl)]
+*/
+
+/*
+	色票 Token（Tailwind v4）
+	- 定義於 @theme，Tailwind 會自動生成對應類別：
+		bg-primary-400、text-neutral-600、border-info-200 ...
+	- 依設計稿：Primary / Neutral / Functional（Danger/Success/Warning/Info）
+*/
+@theme {
+	/* Primary */
+	--color-primary-100: #F5FFE7;
+	--color-primary-200: #E8FEC5;
+	--color-primary-300: #C0FA73;
+	--color-primary-400: #57A203;
+	--color-primary-500: #477A11;
+
+	/* Neutral */
+	--color-neutral-0:   #FFFFFF;
+	--color-neutral-100: #F8F9FA;
+	--color-neutral-200: #E9ECEF;
+	--color-neutral-300: #DEE2E6;
+	--color-neutral-400: #CED4DA;
+	--color-neutral-500: #ADB5BD;
+	--color-neutral-600: #6C757D;
+	--color-neutral-700: #495057;
+	--color-neutral-800: #343A40;
+	--color-neutral-900: #212529;
+
+	/* Functional - Danger */
+	--color-danger-100: #FCF1F1;
+	--color-danger-200: #EBA7A7;
+	--color-danger-300: #D74F4F;
+
+	/* Functional - Success */
+	--color-success-100: #EFF8F4;
+	--color-success-200: #9AD1BA;
+	--color-success-300: #36A375;
+
+	/* Functional - Warning */
+	--color-warning-100: #FEF6EC;
+	--color-warning-200: #F9C588;
+	--color-warning-300: #F38B12;
+
+	/* Functional - Info */
+	--color-info-100: #EEF5FC;
+	--color-info-200: #97C3ED;
+	--color-info-300: #3087DB;
+}
+
+
+@layer components {
+	/*
+	字體樣式（依設計稿轉為類別）
+	- 字距(%) 換算為 px：px = 字級 × 0.05（5%）
+	- 可與色票/間距工具搭配，例如：
+		<h3 class="tw-headings-h3 text-neutral-900 mb-spacing-m">標題</h3>
+	*/
+	/* Display */
+	.display-1, .dispaly-1 { font-size: 64px; line-height: 1.2; letter-spacing: 3.2px; }
+	.display-2, .dispaly-2 { font-size: 48px; line-height: 1.2; letter-spacing: 2.4px; }
+
+	/* Headings */
+	.tw-headings-h1 { font-size: 40px; line-height: 1.2; letter-spacing: 2px; }
+	.tw-headings-h2 { font-size: 32px; line-height: 1.2; letter-spacing: 1.6px; }
+	.tw-headings-h3 { font-size: 28px; line-height: 1.2; letter-spacing: 1.4px; }
+	.tw-headings-h4 { font-size: 24px; line-height: 1.2; letter-spacing: 1.2px; }
+	.tw-headings-h5 { font-size: 20px; line-height: 1.2; letter-spacing: 1px; }
+	.tw-headings-h6 { font-size: 16px; line-height: 1.2; letter-spacing: 0.8px; }
+
+	/* Label */
+	.tw-label-lg { font-size: 20px; line-height: 1.5; letter-spacing: 1px; }
+	.tw-label-md { font-size: 16px; line-height: 1.5; letter-spacing: 0.8px; }
+	.tw-label-sm { font-size: 14px; line-height: 1.5; letter-spacing: 0.7px; }
+	.tw-label-xs { font-size: 12px; line-height: 1.5; letter-spacing: 0.6px; }
+
+	/* Paragraph */
+	.tw-paragraph-lg { font-size: 20px; line-height: 1.5; letter-spacing: 1px; }
+	.tw-paragraph-md { font-size: 16px; line-height: 1.5; letter-spacing: 0.8px; }
+	.tw-paragraph-sm { font-size: 14px; line-height: 1.5; letter-spacing: 0.7px; }
+	.tw-paragraph-xs { font-size: 12px; line-height: 1.5; letter-spacing: 0.6px; }
+}
+
+/*
+	Spacing（間距）工具
+	- 來源：設計稿 Spacing 對照表
+	- 類別命名：p-spacing-m / mx-spacing-xl / gap-spacing-s ...
+	- 也提供 :root 變數，支援 p-[var(--spacing-m)] 這種寫法
+*/
+@layer utilities {
+	/* Design tokens as CSS variables for optional bracket usage */
+	:root {
+		--spacing-xxs: 4px;
+		--spacing-xs: 8px;
+		--spacing-s: 12px;
+		--spacing-m: 16px;
+		--spacing-l: 24px;
+		--spacing-xl: 32px;
+		--spacing-2xl: 40px;
+		--spacing-3xl: 48px;
+		--spacing-4xl: 56px;
+		--spacing-5xl: 64px;
+		--spacing-6xl: 80px;
+	}
+
+	/* Padding (all) */
+	.p-spacing-xxs { padding: 4px; }
+	.p-spacing-xs { padding: 8px; }
+	.p-spacing-s { padding: 12px; }
+	.p-spacing-m { padding: 16px; }
+	.p-spacing-l { padding: 24px; }
+	.p-spacing-xl { padding: 32px; }
+	.p-spacing-2xl { padding: 40px; }
+	.p-spacing-3xl { padding: 48px; }
+	.p-spacing-4xl { padding: 56px; }
+	.p-spacing-5xl { padding: 64px; }
+	.p-spacing-6xl { padding: 80px; }
+
+	/* Padding X */
+	.px-spacing-xxs { padding-left: 4px; padding-right: 4px; }
+	.px-spacing-xs { padding-left: 8px; padding-right: 8px; }
+	.px-spacing-s { padding-left: 12px; padding-right: 12px; }
+	.px-spacing-m { padding-left: 16px; padding-right: 16px; }
+	.px-spacing-l { padding-left: 24px; padding-right: 24px; }
+	.px-spacing-xl { padding-left: 32px; padding-right: 32px; }
+	.px-spacing-2xl { padding-left: 40px; padding-right: 40px; }
+	.px-spacing-3xl { padding-left: 48px; padding-right: 48px; }
+	.px-spacing-4xl { padding-left: 56px; padding-right: 56px; }
+	.px-spacing-5xl { padding-left: 64px; padding-right: 64px; }
+	.px-spacing-6xl { padding-left: 80px; padding-right: 80px; }
+
+	/* Padding Y */
+	.py-spacing-xxs { padding-top: 4px; padding-bottom: 4px; }
+	.py-spacing-xs { padding-top: 8px; padding-bottom: 8px; }
+	.py-spacing-s { padding-top: 12px; padding-bottom: 12px; }
+	.py-spacing-m { padding-top: 16px; padding-bottom: 16px; }
+	.py-spacing-l { padding-top: 24px; padding-bottom: 24px; }
+	.py-spacing-xl { padding-top: 32px; padding-bottom: 32px; }
+	.py-spacing-2xl { padding-top: 40px; padding-bottom: 40px; }
+	.py-spacing-3xl { padding-top: 48px; padding-bottom: 48px; }
+	.py-spacing-4xl { padding-top: 56px; padding-bottom: 56px; }
+	.py-spacing-5xl { padding-top: 64px; padding-bottom: 64px; }
+	.py-spacing-6xl { padding-top: 80px; padding-bottom: 80px; }
+
+	/* Margin (all) */
+	.m-spacing-xxs { margin: 4px; }
+	.m-spacing-xs { margin: 8px; }
+	.m-spacing-s { margin: 12px; }
+	.m-spacing-m { margin: 16px; }
+	.m-spacing-l { margin: 24px; }
+	.m-spacing-xl { margin: 32px; }
+	.m-spacing-2xl { margin: 40px; }
+	.m-spacing-3xl { margin: 48px; }
+	.m-spacing-4xl { margin: 56px; }
+	.m-spacing-5xl { margin: 64px; }
+	.m-spacing-6xl { margin: 80px; }
+
+	/* Margin X */
+	.mx-spacing-xxs { margin-left: 4px; margin-right: 4px; }
+	.mx-spacing-xs { margin-left: 8px; margin-right: 8px; }
+	.mx-spacing-s { margin-left: 12px; margin-right: 12px; }
+	.mx-spacing-m { margin-left: 16px; margin-right: 16px; }
+	.mx-spacing-l { margin-left: 24px; margin-right: 24px; }
+	.mx-spacing-xl { margin-left: 32px; margin-right: 32px; }
+	.mx-spacing-2xl { margin-left: 40px; margin-right: 40px; }
+	.mx-spacing-3xl { margin-left: 48px; margin-right: 48px; }
+	.mx-spacing-4xl { margin-left: 56px; margin-right: 56px; }
+	.mx-spacing-5xl { margin-left: 64px; margin-right: 64px; }
+	.mx-spacing-6xl { margin-left: 80px; margin-right: 80px; }
+
+	/* Margin Y */
+	.my-spacing-xxs { margin-top: 4px; margin-bottom: 4px; }
+	.my-spacing-xs { margin-top: 8px; margin-bottom: 8px; }
+	.my-spacing-s { margin-top: 12px; margin-bottom: 12px; }
+	.my-spacing-m { margin-top: 16px; margin-bottom: 16px; }
+	.my-spacing-l { margin-top: 24px; margin-bottom: 24px; }
+	.my-spacing-xl { margin-top: 32px; margin-bottom: 32px; }
+	.my-spacing-2xl { margin-top: 40px; margin-bottom: 40px; }
+	.my-spacing-3xl { margin-top: 48px; margin-bottom: 48px; }
+	.my-spacing-4xl { margin-top: 56px; margin-bottom: 56px; }
+	.my-spacing-5xl { margin-top: 64px; margin-bottom: 64px; }
+	.my-spacing-6xl { margin-top: 80px; margin-bottom: 80px; }
+
+	/* Gap */
+	.gap-spacing-xxs { gap: 4px; }
+	.gap-spacing-xs { gap: 8px; }
+	.gap-spacing-s { gap: 12px; }
+	.gap-spacing-m { gap: 16px; }
+	.gap-spacing-l { gap: 24px; }
+	.gap-spacing-xl { gap: 32px; }
+	.gap-spacing-2xl { gap: 40px; }
+	.gap-spacing-3xl { gap: 48px; }
+	.gap-spacing-4xl { gap: 56px; }
+	.gap-spacing-5xl { gap: 64px; }
+	.gap-spacing-6xl { gap: 80px; }
+
+	/*
+	單邊間距（更細粒度）
+	- 用法：pt-spacing-m / pr-spacing-xl / pb-spacing-s / pl-spacing-l
+	*/
+	.pt-spacing-xxs { padding-top: 4px; }
+	.pt-spacing-xs  { padding-top: 8px; }
+	.pt-spacing-s   { padding-top: 12px; }
+	.pt-spacing-m   { padding-top: 16px; }
+	.pt-spacing-l   { padding-top: 24px; }
+	.pt-spacing-xl  { padding-top: 32px; }
+	.pt-spacing-2xl { padding-top: 40px; }
+	.pt-spacing-3xl { padding-top: 48px; }
+	.pt-spacing-4xl { padding-top: 56px; }
+	.pt-spacing-5xl { padding-top: 64px; }
+	.pt-spacing-6xl { padding-top: 80px; }
+
+	.pr-spacing-xxs { padding-right: 4px; }
+	.pr-spacing-xs  { padding-right: 8px; }
+	.pr-spacing-s   { padding-right: 12px; }
+	.pr-spacing-m   { padding-right: 16px; }
+	.pr-spacing-l   { padding-right: 24px; }
+	.pr-spacing-xl  { padding-right: 32px; }
+	.pr-spacing-2xl { padding-right: 40px; }
+	.pr-spacing-3xl { padding-right: 48px; }
+	.pr-spacing-4xl { padding-right: 56px; }
+	.pr-spacing-5xl { padding-right: 64px; }
+	.pr-spacing-6xl { padding-right: 80px; }
+
+	.pb-spacing-xxs { padding-bottom: 4px; }
+	.pb-spacing-xs  { padding-bottom: 8px; }
+	.pb-spacing-s   { padding-bottom: 12px; }
+	.pb-spacing-m   { padding-bottom: 16px; }
+	.pb-spacing-l   { padding-bottom: 24px; }
+	.pb-spacing-xl  { padding-bottom: 32px; }
+	.pb-spacing-2xl { padding-bottom: 40px; }
+	.pb-spacing-3xl { padding-bottom: 48px; }
+	.pb-spacing-4xl { padding-bottom: 56px; }
+	.pb-spacing-5xl { padding-bottom: 64px; }
+	.pb-spacing-6xl { padding-bottom: 80px; }
+
+	.pl-spacing-xxs { padding-left: 4px; }
+	.pl-spacing-xs  { padding-left: 8px; }
+	.pl-spacing-s   { padding-left: 12px; }
+	.pl-spacing-m   { padding-left: 16px; }
+	.pl-spacing-l   { padding-left: 24px; }
+	.pl-spacing-xl  { padding-left: 32px; }
+	.pl-spacing-2xl { padding-left: 40px; }
+	.pl-spacing-3xl { padding-left: 48px; }
+	.pl-spacing-4xl { padding-left: 56px; }
+	.pl-spacing-5xl { padding-left: 64px; }
+	.pl-spacing-6xl { padding-left: 80px; }
+
+	/*
+	語意化文字/邊框顏色（簡短別名）
+	- text-primary / text-secondary / text-muted / text-highlight / text-on-dark
+	- border-default 常用分隔線顏色
+	*/
+	.text-primary   { color: var(--color-neutral-900); }
+	.text-secondary { color: var(--color-neutral-600); }
+	.text-muted     { color: var(--color-neutral-500); }
+	.text-highlight { color: var(--color-primary-400); }
+	.text-on-dark   { color: var(--color-neutral-0); }
+	.border-default { border-color: var(--color-neutral-300); }
+
+	/*
+	容器與水平滑動輔助
+	- .container-app：常用版心寬度 1296px，預設含左右自動置中
+	- .h-scroll：僅在內容超出時水平捲動（避免整個 body 出現水平捲軸）
+	*/
+	.container-app { max-width: 1296px; width: 100%; margin-inline: auto; }
+	.h-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+	.no-scroll-x { overflow-x: hidden; }
+}
+
+
