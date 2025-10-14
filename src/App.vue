@@ -14,10 +14,13 @@
 
     <!-- <HeaderView /> -->
     <HeaderView />
+
     <main class="px-5">
       <router-view :key="$route.fullPath" />
     </main>
-  <SaleSingup v-if="route.path.startsWith('/product') || route.path.startsWith('/productDetail')" />
+
+
+  <SaleSingup v-if="route.path.startsWith('/product') || route.path.startsWith('/productDetail') || route.path ==='/'" />
     <FooterView />
   </div>
 </template>

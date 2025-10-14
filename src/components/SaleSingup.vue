@@ -2,7 +2,7 @@
 
 
     <div class="flex w-full justify-center items-center gap-x-[24px] h-[96px] 
-    max-sm:h-[88px] bg-[#E8FEC5] mb-[64px] px-[24px]
+    max-sm:h-[88px] bg-[#E8FEC5] mb-[64px] px-[24px] mt-[48px]
     max-sm:mb-[32px]
   ">
         <div class="flex text-[24px] max-sm:text-[20px] font-[700] font-noto leading-[120%] tracking-[1.2px] max-sm:tracking-[1px]
