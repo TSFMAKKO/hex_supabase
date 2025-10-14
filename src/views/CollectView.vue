@@ -1,7 +1,7 @@
 <template>
     <!-- <h2>Collect</h2> -->
-    <div class="grid gap-y-[32px] max-w-[636px] mx-auto mb-[64px]">
-        <div class="font-[700] text-[28px] leading-[1.2] tracking-[1.4] flex justify-center gap-x-[16px] ">
+    <div class="grid gap-y-[32px] max-sm:gap-y-[24px] max-w-[636px] mx-auto mb-[64px]">
+        <div class="font-[700] text-[28px] max-sm:text-[24px] leading-[1.2] tracking-[1.4px] max-sm:tracking-[1.2px] flex justify-center gap-x-[16px] ">
             <div class="flex justify-center items-center p-[8px] rounded-[50%] bg-[#C0FA73]">
                 <img src="../assets/checked.svg" alt="">
             </div>
@@ -15,7 +15,7 @@
                 門市營業時間：週一至週五 10:00 - 22:00
             </div>
         </div>
-        <div class="flex flex-col gap-x-[32px]">
+        <div class="flex flex-col gap-y-[32px]">
             <!-- <div class="flex gap-x-[16px]">
                 <div>
                     <img src="https://picsum.photos/id/1011/120/120" alt="?">
@@ -28,7 +28,7 @@
                 </div>
             </div>   -->
 
-            <div v-for="c in collects" :key="c.id" class="flex gap-x-[16px]">
+            <div v-for="c in collects" :key="c.id" class="flex gap-x-[16px] border-b border-[#DEE2E6] pb-[32px] rounded-[4px]">
                 <div>
                     <img :src="c.img" alt="?">
                 </div>
