@@ -15,7 +15,7 @@
     <!-- <HeaderView /> -->
     <HeaderView />
 
-    <main class="px-5">
+    <main class="px-[12px]">
       <router-view :key="$route.fullPath" />
     </main>
 
