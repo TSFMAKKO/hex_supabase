@@ -13,19 +13,19 @@
                 <div
                     class="text-center font-[700] leading-[120%] tracking-[1.4px] border-b-2 border-b-[#212529] text-[#212529]">
                     登入</div>
-                <div class="text-center tracking-[1.4px] border-b-2 border-b-[#DEE2E6] text-[#798797]">註冊</div>
+                <div class="text-center tracking-[1.4px] border-b-2 border-b-[#DEE2E6] text-[#798797] max-sm:border-b-2 max-sm:border-b-[#DEE2E6]">註冊</div>
             </div>
             <div class="grid gap-y-[8px]">
                 <div
-                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6]">
+                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6] rounded-[4px]">
                     <img src="../assets/facebook.svg" alt="" srcset="">Facebook 登入
                 </div>
                 <div
-                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6]">
+                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6] rounded-[4px]">
                     <img src="../assets/apple.svg" alt="" srcset="">Apple 登入
                 </div>
                 <div
-                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6]">
+                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6] rounded-[4px]">
                     <img src="../assets/google.svg" alt="" srcset="">Google 登入
                 </div>
             </div>

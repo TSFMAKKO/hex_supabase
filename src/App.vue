@@ -8,6 +8,7 @@
       <router-link to="/story">Story</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/signup">Signup</router-link> |
+      <router-link to="/collect">Collect</router-link> |
       <router-link to="/test">Test</router-link>
     </nav>
 
@@ -16,14 +17,20 @@
     <main class="px-5">
       <router-view :key="$route.fullPath" />
     </main>
+  <SaleSingup v-if="route.path.startsWith('/product') || route.path.startsWith('/productDetail')" />
     <FooterView />
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
 import HeaderView from './components/HeaderView.vue';
 import FooterView from './components/FooterView.vue';
+import SaleSingup from './components/SaleSingup.vue';
+
+
 
 
 </script>
@@ -39,7 +46,7 @@ body {
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 5%;
-  color: #212529
+  color: #212529;
 }
 
 

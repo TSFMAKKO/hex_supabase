@@ -152,6 +152,7 @@
         </div>
 
     </div>
+    <!-- <SaleSingup /> -->
 
     <!-- <div class="mx-auto w-[1296px] grid grid-cols-1 gap-y-[16px] mb-[88px]">
         <div class="font-[700] text-[24px] leading-[1.2]">你可能也喜歡</div>
@@ -198,11 +199,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router'
-
+// import SaleSingup from '../components/SaleSingup.vue';
 const route = useRoute()
 // console.log(route.params.id)  // '123'
 
 const id = ref(route.params.id)
 console.log("id:", route.params.id);
+
+
 
 </script>

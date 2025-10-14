@@ -17,15 +17,15 @@
             </div>
             <div class="grid gap-y-[8px]">
                 <div
-                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6]">
+                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6] rounded-[4px]">
                     <img src="../assets/facebook.svg" alt="" srcset="">Facebook 註冊
                 </div>
                 <div
-                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6]">
+                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6] rounded-[4px]">
                     <img src="../assets/apple.svg" alt="" srcset="">Apple 註冊
                 </div>
                 <div
-                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6]">
+                    class="py-[20px] px-[12px] font-[400] bg-[#fff] flex items-center gap-x-[12px]  max-sm:border max-sm:border-[#DEE2E6] rounded-[4px]">
                     <img src="../assets/google.svg" alt="" srcset="">Google 註冊
                 </div>
             </div>
