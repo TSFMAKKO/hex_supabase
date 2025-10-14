@@ -12,6 +12,8 @@ import Create from '../views/CreateView.vue';
 import Story from '../views/StoryView.vue';
 import ProductDeteil from '../views/ProductDeteilView.vue';
 import ProductListView from '../views/ProductListView.vue';
+import Login from '../views/LoginView.vue';
+import Signup from '../views/SignupView.vue';
 
 const routes = [
   {
@@ -31,6 +33,20 @@ const routes = [
     name: 'productListView',
     component: ProductListView,
     meta: { title: '商品頁' },
+
+  },
+    {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: { title: '登入頁' },
+
+  },
+    {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup,
+    meta: { title: '註冊頁' },
 
   },
 

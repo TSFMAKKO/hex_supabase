@@ -2,8 +2,12 @@
   <div id="app">
     <nav>
       <router-link to="/">Index</router-link> |
-      <router-link to="/product">Product</router-link> |
       <router-link to="/create">Create</router-link> |
+      <router-link to="/product">Product</router-link> |
+      <router-link to="/productDeteil/29">ProductDetail</router-link> |
+      <router-link to="/story">Story</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/signup">Signup</router-link> |
       <router-link to="/test">Test</router-link>
     </nav>
 
