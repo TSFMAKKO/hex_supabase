@@ -11,13 +11,13 @@
 </style>
 
 <template>
-  <h1>Product</h1>
+  <!-- <h1>Product</h1> -->
   <div v-if="loading">載入中…</div>
   <div v-else>
     <div v-if="fetchError" class="error">發生錯誤：{{ fetchError }}</div>
     <div v-else>
       <div v-if="products.length === 0">目前沒有產品。</div>
-      <ul class="products-list">
+      <ul class="products-list max-w-[1296px] mx-auto">
         <li v-for="p in products" :key="p.id" class="product">
           <template v-if="p?.isEdit === false || p?.isEdit === undefined">
             <strong>標題:{{ p.title }}</strong>
