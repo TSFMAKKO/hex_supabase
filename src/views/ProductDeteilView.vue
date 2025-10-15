@@ -125,7 +125,9 @@
                     <div
                         class="w-[255px] h-[48px] flex justify-center items-center gap-x-[8px] text-[#212529] border border-[#212529]">
                         <div>
-                            <img src="../assets/fav.svg" alt="" />
+                            <!-- 用v-if控制fav -->
+                            <img v-if="productDetail.fav === false" src="../assets/fav.svg" alt="" />
+                            <img v-if="productDetail.fav === true" src="../assets/fav2.svg" alt="" />
                         </div>
                         <div>加入收藏</div>
                     </div>
@@ -250,16 +252,18 @@ const selectSize = (colorIdx, sizeIdx, inStock, stock) => {
 
 const selectColor = (idx) => {
     productIndex.value = idx
-    // 預選該顏色第一個有庫存的尺寸
-    const sizes = productDetail.value.products?.[idx] || []
+    // 預選該顏色第一個有庫存的尺寸 { size: "35(22.5)", in_stock: true, stock: 3 },
+    const sizes = productDetail.value.products[idx] || {}
+    // 選出第一個有庫存的size
     const j = sizes.findIndex(s => s.in_stock)
+    console.log('j:', j)
     sizeIndex.value = j >= 0 ? [idx, j] : [idx, 0]
 }
 // 打api 回傳
 const productDetail = ref({
     title: "Platform 404",
     money: { sale: 2600, original_price: 3200 },
-    fav: true,
+    fav: false,
     des: [
         "Platform 404 以柔和奶白為底，搭配深藍色皮革點綴，走在街上自帶回頭率。鞋型採用復古運動風輪廓，結合輕量厚底與柔軟泡棉鞋舌，兼顧美感與舒適。",
         "鞋身選用柔軟皮革材質，打造出清新卻不失個性的氛圍，並以鞋面透氣孔設計提升穿著體驗，兼顧質感與舒適度，適合日常長時間著用。無論是街頭穿搭、日常通勤或週末出遊都能輕鬆駕馭。"
@@ -267,8 +271,18 @@ const productDetail = ref({
     img: [[
         "/hex_supabase/src/assets/product-10.png",
         "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png"
+        "/hex_supabase/src/assets/product-10.png",
+        "/hex_supabase/src/assets/product-10.png",
+        "/hex_supabase/src/assets/product-10.png",
+        "/hex_supabase/src/assets/product-10.png",
+        "/hex_supabase/src/assets/product-10.png",
+        "/hex_supabase/src/assets/product-10.png",
     ], [
+        "/hex_supabase/src/assets/product-11.png",
+        "/hex_supabase/src/assets/product-11.png",
+        "/hex_supabase/src/assets/product-11.png",
+        "/hex_supabase/src/assets/product-11.png",
+        "/hex_supabase/src/assets/product-11.png",
         "/hex_supabase/src/assets/product-11.png",
         "/hex_supabase/src/assets/product-11.png",
         "/hex_supabase/src/assets/product-11.png"
@@ -287,7 +301,7 @@ const productDetail = ref({
             { size: "43(26.5)", in_stock: true, stock: 3 }
         ],
         [
-            { size: "35(22.5)", in_stock: true, stock: 2 },
+            { size: "35(22.5)", in_stock: false, stock: 0 },
             { size: "36(23)", in_stock: false, stock: 0 },
             { size: "37(23.5)", in_stock: true, stock: 5 },
             { size: "38(24)", in_stock: true, stock: 4 },
