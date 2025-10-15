@@ -100,7 +100,7 @@
   </div>
 
   <!-- 下方benner -->
-  <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
+  <!-- <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner-co-branded.png" alt="">
     <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
       <div class=" text-[#fff] grid gap-y-[32px]">
@@ -113,7 +113,26 @@
       <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
     </div>
 
+  </div> -->
+
+  <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden py-[64px] max-sm:py-[40px]">
+    <img class="w-full max-w-none" src="../assets/banner-co-branded.png" alt="">
+    <div
+      class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[clamp(20px,3vw,40px)] max-w-[1200px]">
+      <div class="text-[#fff] grid gap-y-[clamp(6px,1vw,12px)]">
+        <div class="grid gap-y-[clamp(3px,0.5vw,6px)]">
+          <div class="text-[clamp(1.5rem,3.5vw,3rem)] font-bold leading-tight">URBNSTEP x Kevin Chen</div>
+          <div class="text-[clamp(1rem,2vw,1.5rem)] font-semibold">跨界聯名，限量發售</div>
+        </div>
+        <div class="text-[clamp(0.875rem,1.2vw,1.125rem)] leading-relaxed">新銳漫畫家 Kevin Chen 親自操刀設計，街頭能量全面引爆！</div>
+      </div>
+      <div
+        class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-fit cursor-pointer hover:opacity-90 transition-opacity">
+        立即選購
+      </div>
+    </div>
   </div>
+
 
   <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden py-[48px] max-sm:py-[24px] sm:hidden">
     <img class="w-full max-w-none  " src="../assets/banner-co-branded-sm.png" alt="">
@@ -139,37 +158,49 @@
     <div class="max-sm:overflow-x-auto">
       <div class="grid grid-cols-4 max-sm:grid-cols-2 gap-x-[24px] w-full max-sm:gap-x-[12px] max-sm:gap-y-[12px]">
 
-        <div class="relative max-w-[306px]">
-          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
-            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
-          </div>
-          <img class="w-full h-full object-cover" src="../assets/product-10.png" alt="">
-        </div>
-        <div class="relative">
-          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
-            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
-          </div>
+        <!--  -->
+        <div class="relative group w-full h-full overflow-hidden">
           <img class="w-full h-full object-cover" src="../assets/product-1.png" alt="">
-        </div>
-        <div class="relative">
-          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
-            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
+          <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-0 group-hover:-translate-y-1/2 
+              text-center opacity-0 group-hover:opacity-100
+              transition-all duration-300">
+            <div class="tw-headings-h3 font-[700] text-white w-[220px]">URBN RUNNER</div>
+            <div class="tw-headings-h4 font-[700] text-white">慢跑系列</div>
           </div>
-          <img class="w-full h-full object-cover" src="../assets/product-2.png" alt="">
         </div>
-        <div class="relative">
-          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
-            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
+
+        <div class="relative group w-full h-full overflow-hidden">
+          <img class="w-full h-full object-cover" src="../assets/product-10.png" alt="">
+          <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-0 group-hover:-translate-y-1/2 
+              text-center opacity-0 group-hover:opacity-100
+              transition-all duration-300">
+            <div class="tw-headings-h3 font-[700] text-white w-[220px]">STREETMODE</div>
+            <div class="tw-headings-h4 font-[700] text-white">滑板系列</div>
           </div>
+        </div>
+
+        <div class="relative group w-full h-full overflow-hidden">
           <img class="w-full h-full object-cover" src="../assets/product-3.png" alt="">
+          <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-0 group-hover:-translate-y-1/2 
+              text-center opacity-0 group-hover:opacity-100
+              transition-all duration-300">
+            <div class="tw-headings-h3 font-[700] text-white min-w-[220px]">CHUNK DISTRICT</div>
+            <div class="tw-headings-h4 font-[700] text-white">厚底系列</div>
+          </div>
+        </div>
+
+        <div class="relative group w-full h-full overflow-hidden">
+          <img class="w-full h-full object-cover" src="../assets/product-4.png" alt="">
+          <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-0 group-hover:-translate-y-1/2 
+              text-center opacity-0 group-hover:opacity-100
+              transition-all duration-300">
+            <div class="tw-headings-h3 font-[700] text-white w-[220px]">COLLAB ZONE</div>
+            <div class="tw-headings-h4 font-[700] text-white">聯名企劃</div>
+          </div>
         </div>
 
       </div>

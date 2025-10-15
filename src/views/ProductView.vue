@@ -22,7 +22,7 @@
         鞋</span>
 
       <span>/</span>
-      <span class="text-[#343A40]">所有產品</span>
+      <span class="text-[#343A40]">{{ breadcrumb_type }}</span>
     </div>
 
   </div>
@@ -72,6 +72,20 @@ console.log('sex:', sex.value)
 
 const category = computed(() => route.params.category || 'all')
 console.log('category:', category.value)
+
+const breadcrumb_type = computed(() => {
+  if(category.value === 'all') {
+    return '所有產品'
+  } else if(category.value === 'running') {
+    return '慢跑鞋'
+  } else if(category.value === 'skateboarding') {
+    return '滑板鞋'
+  } else if(category.value === 'loafers') {
+    return '厚底鞋'
+  } else if(category.value === 'limited') {
+    return '限量 / 聯名企劃'
+  }
+})
 
 // console.log(`${route.params.sex} / ${route.params.category}`);
 
