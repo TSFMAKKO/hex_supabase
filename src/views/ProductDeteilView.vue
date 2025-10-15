@@ -8,7 +8,7 @@
             <ul class="grid grid-cols-2 gap-[8px] max-md:hidden">
                 <template v-for="img in productDetail.img[productIndex]">
                     <li class="bg-gray-400">
-                        <img :src="`${img}`" />
+                        <img :src="`${img}`" :key="img" />
                     </li>
                 </template>
 
@@ -76,14 +76,6 @@
                     <div class="flex flex-col gap-y-[8px]">
                         <div>顏色</div>
                         <div class="flex gap-x-[8px]">
-                            <!-- <div>
-                                <div class="border border-[#6C757D]">
-                                    <img class="w-[64px]" src="../assets/product-10.png" alt="" />
-                                </div>
-                                <div class="text-[#6C757D]">藍色</div>
-                            </div> -->
-
-                            <!-- <template v-for="p in productDetail"> -->
                             <div v-for="(c, i) in productDetail.colors" :key="i" class="flex flex-col items-center">
                                 <div @click="selectColor(i)" :class="[
                                     'w-[64px] h-[64px] flex items-center justify-center',
@@ -91,12 +83,11 @@
                                     'cursor-pointer'
                                 ]">
                                     <!-- /hex_supabase/src/assets/product-10.png -->
-                                    <img class="w-[64px]" :src="`/hex_supabase/src/assets/product-${i + 10}.png`"
+                                    <img class="w-[64px]" :src="`${productDetail.colorProduct[i]}`"
                                         alt="" />
                                 </div>
                                 <div class="text-[#6C757D] mt-2">{{ c }}</div>
                             </div>
-                            <!-- </template> -->
 
                         </div>
                     </div>
@@ -123,8 +114,7 @@
                 </div>
                 <div class="flex gap-x-[8px]">
                     <!-- 切換最愛 -->
-                    <div @click="toggleFav()"
-                        class="w-[255px] h-[48px] flex justify-center items-center gap-x-[8px] text-[#212529] border border-[#212529]
+                    <div @click="toggleFav()" class="w-[255px] h-[48px] flex justify-center items-center gap-x-[8px] text-[#212529] border border-[#212529]
                             hover:bg-[#212529] hover:text-[#ffffff] transition
                         
                         ">
@@ -195,7 +185,7 @@
 
     <!-- 你可能也喜歡 -->
     <div class="mx-auto max-w-[1296px] w-full grid grid-cols-1 gap-y-[16px] mb-[88px]">
-        <div class="font-[700] text-[24px] leading-[1.2]">你可能也喜歡</div>
+        <div class="font-[700] text-[24px] leading-[1.2]">你可能也喜歡...</div>
         <!-- 商品列表 -->
         <div class="w-full max-sm:max-w-[100%] overflow-hidden">
             <!-- 讓小螢幕改為水平滑動的容器，避免撐破 body 寬度 -->
@@ -203,32 +193,32 @@
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
                     <div><img src="../assets/product-10.png" alt="" /></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
-                        <div class="title font-[700] leading-[1.2]">商品標題</div>
-                        <div class="price">NT$ 2,999</div>
+                        <div class="title font-[700] leading-[1.2]">VM001</div>
+                        <div class="price">NT$2,600</div>
                     </div>
                 </div>
 
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
                     <div><img src="../assets/product-11.png" alt="" /></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
-                        <div class="title font-[700] leading-[1.2]">商品標題</div>
-                        <div class="price">NT$ 2,999</div>
+                        <div class="title font-[700] leading-[1.2]">Melty Kiss</div>
+                        <div class="price">NT$4,000</div>
                     </div>
                 </div>
 
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
                     <div><img src="../assets/product-10.png" alt="" /></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
-                        <div class="title font-[700] leading-[1.2]">商品標題</div>
-                        <div class="price">NT$ 2,999</div>
+                        <div class="title font-[700] leading-[1.2]">BOOMBLOK</div>
+                        <div class="price">NT$3,200</div>
                     </div>
                 </div>
 
                 <div class="grid gap-y-[12px] max-sm:min-w-[300px]">
                     <div><img src="../assets/product-10.png" alt="" /></div>
                     <div class="grid grid-rows-1 gap-y-[4px]">
-                        <div class="title font-[700] leading-[1.2]">商品標題</div>
-                        <div class="price">NT$ 2,999</div>
+                        <div class="title font-[700] leading-[1.2]">Sugar Snap</div>
+                        <div class="price">NT$3,200</div>
                     </div>
                 </div>
             </div>
@@ -278,26 +268,32 @@ const productDetail = ref({
         "Platform 404 以柔和奶白為底，搭配深藍色皮革點綴，走在街上自帶回頭率。鞋型採用復古運動風輪廓，結合輕量厚底與柔軟泡棉鞋舌，兼顧美感與舒適。",
         "鞋身選用柔軟皮革材質，打造出清新卻不失個性的氛圍，並以鞋面透氣孔設計提升穿著體驗，兼顧質感與舒適度，適合日常長時間著用。無論是街頭穿搭、日常通勤或週末出遊都能輕鬆駕馭。"
     ],
+    // https://raw.githubusercontent.com/TSFMAKKO/hex_supabase/refs/heads/main/src/assets/inspiration-10.png
+    // `${new URL('../assets/product-10.png', import.meta.url).href}`,
     img: [[
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
-        "/hex_supabase/src/assets/product-10.png",
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
     ], [
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png",
-        "/hex_supabase/src/assets/product-11.png"
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
     ]],
     colors: ['藍色', '卡其色'],
+    colorProduct: [
+        `${new URL('../assets/product-10.png', import.meta.url).href}`,
+        `${new URL('../assets/product-11.png', import.meta.url).href}`,
+    ],
     products: [
         [
             { size: "35(22.5)", in_stock: true, stock: 3 },

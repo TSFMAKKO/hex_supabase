@@ -53,7 +53,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-
+//  // https://raw.githubusercontent.com/TSFMAKKO/hex_supabase/refs/heads/main/src/assets/inspiration-10.png
+   
 const collects = ref([
     {
         id: 1,
@@ -61,7 +62,7 @@ const collects = ref([
         size: '38',
         color: 'Navy',
         price: 2600,
-        img: '/hex_supabase/src/assets/product-10.png'
+        img: 'https://raw.githubusercontent.com/TSFMAKKO/hex_supabase/refs/heads/main/src/assets/product-10.png'
     },
     {
         id: 2,
@@ -69,7 +70,7 @@ const collects = ref([
         size: '38',
         color: 'White',
         price: 3200,
-        img: '/hex_supabase/src/assets/product-11.png'
+        img: 'https://raw.githubusercontent.com/TSFMAKKO/hex_supabase/refs/heads/main/src/assets/product-11.png'
     },
     {
         id: 3,
@@ -77,7 +78,7 @@ const collects = ref([
         size: '38',
         color: 'Violet',
         price: 4000,
-        img: '/hex_supabase/src/assets/product-10.png'
+        img: 'https://raw.githubusercontent.com/TSFMAKKO/hex_supabase/refs/heads/main/src/assets/product-10.png'
     },
 ])
 

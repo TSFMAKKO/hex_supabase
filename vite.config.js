@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   base: '/hex_supabase/',
     server: {
-    host: '0.0.0.0', // ✅ 允許外部訪問
+    host: '0.0.0.0',
     port: 5173,
   },
 
