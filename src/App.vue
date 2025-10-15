@@ -44,6 +44,9 @@ import SaleSingup from './components/SaleSingup.vue';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Mina&display=swap");
 
+*{
+  outline: 1px solid rgba(255, 0, 0, 0.1);
+}
 body {
   font-family: 'Noto Sans TC', sans-serif;
   font-weight: 500;

@@ -17,7 +17,7 @@
 */
 @theme {
 	/* Primary */
-	--color-primary-100: #F5FFE7;
+	--color-primary-100: #F5FEE7;
 	--color-primary-200: #E8FEC5;
 	--color-primary-300: #C0FA73;
 	--color-primary-400: #57A203;
@@ -65,16 +65,16 @@
 		<h3 class="tw-headings-h3 text-neutral-900 mb-spacing-m">標題</h3>
 	*/
 	/* Display */
-	.display-1, .dispaly-1 { font-size: 64px; line-height: 1.2; letter-spacing: 3.2px; }
-	.display-2, .dispaly-2 { font-size: 48px; line-height: 1.2; letter-spacing: 2.4px; }
+	.display-1 { font-size: 64px; line-height: 1.2; letter-spacing: 3.2px; font-weight: 700; }
+	.display-2 { font-size: 48px; line-height: 1.2; letter-spacing: 2.4px; font-weight: 700; }
 
 	/* Headings */
-	.tw-headings-h1 { font-size: 40px; line-height: 1.2; letter-spacing: 2px; }
-	.tw-headings-h2 { font-size: 32px; line-height: 1.2; letter-spacing: 1.6px; }
-	.tw-headings-h3 { font-size: 28px; line-height: 1.2; letter-spacing: 1.4px; }
-	.tw-headings-h4 { font-size: 24px; line-height: 1.2; letter-spacing: 1.2px; }
-	.tw-headings-h5 { font-size: 20px; line-height: 1.2; letter-spacing: 1px; }
-	.tw-headings-h6 { font-size: 16px; line-height: 1.2; letter-spacing: 0.8px; }
+	.tw-headings-h1 { font-size: 40px; line-height: 1.2; letter-spacing: 2px; font-weight: 700; }
+	.tw-headings-h2 { font-size: 32px; line-height: 1.2; letter-spacing: 1.6px; font-weight: 700; }
+	.tw-headings-h3 { font-size: 28px; line-height: 1.2; letter-spacing: 1.4px; font-weight: 700; }
+	.tw-headings-h4 { font-size: 24px; line-height: 1.2; letter-spacing: 1.2px; font-weight: 700; }
+	.tw-headings-h5 { font-size: 20px; line-height: 1.2; letter-spacing: 1px; font-weight: 700; }
+	.tw-headings-h6 { font-size: 16px; line-height: 1.2; letter-spacing: 0.8px; font-weight: 700; }
 
 	/* Label */
 	.tw-label-lg { font-size: 20px; line-height: 1.5; letter-spacing: 1px; }
@@ -83,10 +83,10 @@
 	.tw-label-xs { font-size: 12px; line-height: 1.5; letter-spacing: 0.6px; }
 
 	/* Paragraph */
-	.tw-paragraph-lg { font-size: 20px; line-height: 1.5; letter-spacing: 1px; }
-	.tw-paragraph-md { font-size: 16px; line-height: 1.5; letter-spacing: 0.8px; }
-	.tw-paragraph-sm { font-size: 14px; line-height: 1.5; letter-spacing: 0.7px; }
-	.tw-paragraph-xs { font-size: 12px; line-height: 1.5; letter-spacing: 0.6px; }
+	.tw-paragraph-lg { font-size: 20px; line-height: 1.5; letter-spacing: 1px; font-weight: 400; }
+	.tw-paragraph-md { font-size: 16px; line-height: 1.5; letter-spacing: 0.8px; font-weight: 400; }
+	.tw-paragraph-sm { font-size: 14px; line-height: 1.5; letter-spacing: 0.7px; font-weight: 400; }
+	.tw-paragraph-xs { font-size: 12px; line-height: 1.5; letter-spacing: 0.6px; font-weight: 400; }
 }
 
 /*
@@ -265,6 +265,22 @@
 	.text-highlight { color: var(--color-primary-400); }
 	.text-on-dark   { color: var(--color-neutral-0); }
 	.border-default { border-color: var(--color-neutral-300); }
+
+    /* Background utility for primary */
+    .bg-primary { background-color: var(--color-primary); }
+	.bg-primary-100 { background-color: var(--color-primary-100); }
+	.bg-primary-200 { background-color: var(--color-primary-200); }
+	.bg-primary-300 { background-color: var(--color-primary-300); }
+	.bg-primary-400 { background-color: var(--color-primary-400); }
+	.bg-primary-500 { background-color: var(--color-primary-500); }
+
+	/* Hover variants following the same token */
+	.hover\:bg-primary:hover { background-color: var(--color-primary); }
+	.hover\:bg-primary-100:hover { background-color: var(--color-primary-100); }
+	.hover\:bg-primary-200:hover { background-color: var(--color-primary-200); }
+	.hover\:bg-primary-300:hover { background-color: var(--color-primary-300); }
+	.hover\:bg-primary-400:hover { background-color: var(--color-primary-400); }
+	.hover\:bg-primary-500:hover { background-color: var(--color-primary-500); }
 
 	/*
 	容器與水平滑動輔助

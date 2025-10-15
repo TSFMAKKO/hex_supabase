@@ -8,12 +8,26 @@
     <div class="h-[48px] w-[50%] text-[#212529] bg-[#F5FEE7] flex justify-center items-center">品牌故事</div>
   </div>
 
-  <div class="benner max-sm:hidden w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px]">
+  <div class="benner relative max-sm:hidden w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner.png" alt="">
+    <div class="absolute top-[50%] left-[200px] transform -translate-y-1/2 flex flex-col gap-y-[48px]">
+      <div class=" text-[#fff] grid gap-y-[16px]">
+        <div class="display-1">URBNSTEP</div>
+        <div class="tw-headings-h3">Your Step, Your Statement</div>
+      </div>
+      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+    </div>
   </div>
 
-   <div class="benner sm:hidden w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px]">
+  <div class="benner relative sm:hidden w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner-sm.png" alt="">
+    <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
+      <div class=" text-[#fff] grid gap-y-[16px]">
+        <div class="display-1">URBNSTEP</div>
+        <div class="tw-headings-h3">Your Step, Your Statement</div>
+      </div>
+      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+    </div>
   </div>
 
   <div class="grid gap-y-[32px] max-w-[1296px] w-[90%] mx-auto py-[64px] max-sm:py-[40px]">
@@ -64,16 +78,20 @@
     <!-- 卷軸容器（桌面：grid；小螢幕：水平滑動） -->
     <div class="overflow-x-auto">
       <div class="grid grid-cols-4 gap-x-[24px] w-full max-sm:flex max-sm:gap-x-[16px]">
-        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0">
+        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0 relative">
+          <p class="absolute top-0 left-0 tw-label-sm bg-primary-400">人氣 No.1</p>
           <img class="w-full h-full object-cover" src="../assets/product-10.png" alt="">
         </div>
-        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0">
+        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0 relative">
+          <p class="absolute top-0 left-0 tw-label-sm bg-primary-400">人氣 No.1</p>
           <img class="w-full h-full object-cover" src="../assets/product-1.png" alt="">
         </div>
-        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0">
+        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0 relative">
+          <p class="absolute top-0 left-0 tw-label-sm bg-primary-400">人氣 No.1</p>
           <img class="w-full h-full object-cover" src="../assets/product-2.png" alt="">
         </div>
-        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0">
+        <div class="max-sm:w-[300px] max-sm:h-[300px] max-sm:shrink-0 relative">
+          <p class="absolute top-0 left-0 tw-label-sm bg-primary-400">人氣 No.1</p>
           <img class="w-full h-full object-cover" src="../assets/product-3.png" alt="">
         </div>
 
@@ -81,32 +99,76 @@
     </div>
   </div>
 
-  <!--  -->
-  <div class="w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
+  <!-- 下方benner -->
+  <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner-co-branded.png" alt="">
+    <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
+      <div class=" text-[#fff] grid gap-y-[32px]">
+        <div class="grid gap-y-[16px]">
+          <div class="display-2 max-xl:tw-headings-h2">URBNSTEP x Kevin Chen</div>
+          <div class="tw-headings-h2 max-xl:tw-headings-h6">跨界聯名，限量發售</div>
+        </div>
+        <div class="tw-paragraph-lg">新銳漫畫家 Kevin Chen 親自操刀設計，街頭能量全面引爆！</div>
+      </div>
+      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+    </div>
+
   </div>
 
-    <div class="w-[calc(100vw-7px)] -mx-5 overflow-hidden py-[48px] max-sm:py-[24px] sm:hidden">
+  <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden py-[48px] max-sm:py-[24px] sm:hidden">
     <img class="w-full max-w-none  " src="../assets/banner-co-branded-sm.png" alt="">
+    <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
+      <div class=" text-[#fff] grid gap-y-[16px]">
+        <div class="grid gap-y-[16px]">
+          <div class="tw-headings-h2">URBNSTEP</div>
+          <div class="tw-headings-h2">x</div>
+          <div class="tw-headings-h2">Kevin Chen</div>
+          <div class="tw-headings-h5">跨界聯名，限量發售</div>
+        </div>
+        <div class="tw-paragraph-md text-neutral-500">新銳漫畫家 Kevin Chen 親自操刀設計，街頭能量全面引爆！</div>
+      </div>
+      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+    </div>
+
   </div>
 
   <!-- 依系列選購 -->
   <div class="flex flex-col gap-y-[16px] max-w-[1296px] w-[90%] max-sm:w-[100%] mx-auto py-[64px] max-sm:py-[40px]">
     <div class="font-[700] text-[32px] leading-[1.2] tracking-[1.6px]">依系列選購</div>
     <!-- 卷軸容器（桌面：grid；小螢幕：水平滑動） -->
-    <div class="overflow-x-auto">
+    <div class="max-sm:overflow-x-auto">
       <div class="grid grid-cols-4 max-sm:grid-cols-2 gap-x-[24px] w-full max-sm:gap-x-[12px] max-sm:gap-y-[12px]">
 
-        <div class="">
+        <div class="relative max-w-[306px]">
+          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
+            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
+          </div>
           <img class="w-full h-full object-cover" src="../assets/product-10.png" alt="">
         </div>
-        <div class="">
+        <div class="relative">
+          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
+            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
+          </div>
           <img class="w-full h-full object-cover" src="../assets/product-1.png" alt="">
         </div>
-        <div class="">
+        <div class="relative">
+          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
+            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
+          </div>
           <img class="w-full h-full object-cover" src="../assets/product-2.png" alt="">
         </div>
-        <div class="">
+        <div class="relative">
+          <div class="absolute inset-0 bg-[#000] opacity-40"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <div class="tw-headings-h3 font-[700] text-[#fff] w-[220px]">URBN RUNNER</div>
+            <div class="tw-headings-h4 font-[700] text-[#fff]">慢跑系列</div>
+          </div>
           <img class="w-full h-full object-cover" src="../assets/product-3.png" alt="">
         </div>
 
