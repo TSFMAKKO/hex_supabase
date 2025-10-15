@@ -22,24 +22,23 @@
         <ul
             class="products-list w-full flex content-stretch flex-wrap gap-x-[24px] max-sm:gap-x-[12px] gap-y-[48px] max-sm:gap-y-[24px] !mt-[0px] mb-[48px]">
             <li v-for="p in products" :key="p.id"
-                class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] flex flex-col justify-end !border-b-0
-                
+                class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] 
+                    flex flex-wrap items-stretch  !border-b-0
                 ">
                 <template v-if="p?.isEdit === false || p?.isEdit === undefined">
                     <!-- <router-link :to="`/productDeteil/${p.id}`"> -->
-                    <div class="mb-[12px] max-w-sm mx-auto ">
-                        <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
-                        <img class="w-full h-auto max-h-[260px] object-cover " :key="p.src" :src="p.src" :alt="p.src"
-                            srcset="">
+                    <div class="mb-[12px] w-full">
+                        <div class="w-full h-[260px] overflow-hidden">
+                            <!--   <img :key="p.imageUrl" :src="p.src + '?t=' + Date.now()" :alt="p.src" srcset="">   -->
+                            <img class="w-full h-full object-cover object-center" :key="p.src" :src="p.src" :alt="p.title" />
+                        </div>
                     </div>
                     <div class="flex flex-col gap-y-[4px]">
                         <strong class="font-[700]">{{ p.title }}</strong>
                         <div>NT${{ p.price.toLocaleString() }}</div>
                         <div class="flex gap-x-[8px]">
                             <router-link :to="`/productDeteil/${p.id}`">查看詳情</router-link>
-                            <!-- 編輯按鈕 -->
                             <button type="button" @click="editHandler(p)">編輯</button>
-                            <!-- 刪除按鈕 -->
                             <button type="button" @click="delHandler(p?.image_path, p?.id)">刪除</button>
                         </div>
                     </div>
@@ -77,8 +76,6 @@
                 <img class="w-[20px] h-[20px]" src="../../assets/right.png" alt="" srcset=""></img>
             </a>
         </div>
-        <!-- </div> -->
-        <!-- </div> -->
 
     </div>
 </template>

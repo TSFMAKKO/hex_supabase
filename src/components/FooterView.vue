@@ -1,5 +1,4 @@
 <template>
-
     <footer class="bg-[#F8F9FA] py-[64px]">
         <div class="flex w-full px-5 ">
             <div class="flex max-sm:items-start max-sm:flex-col h-[48px] items-center justify-between w-[1296px]
@@ -10,8 +9,16 @@
                 <div class="flex max-sm:flex-col gap-x-[40px] max-sm:gap-y-[4px] text-[16px] 
             font-[500] leading-[150%] 
             tracking-[0.8px] px-[12px]">
-                    <div class="w-full text-left py-[12px]">商品列表</div>
-                    <div class="w-full text-left py-[12px]">品牌故事</div>
+                    <div class="w-full text-left py-[12px]">
+                        <router-link to="/product" class="">
+                            商品列表
+                        </router-link>
+                    </div>
+                    <div class="w-full text-left py-[12px]">
+                        <router-link to="/story">
+                            品牌故事
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>

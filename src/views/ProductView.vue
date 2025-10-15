@@ -27,12 +27,6 @@
 
   </div>
 
-
-  <!-- <div class="flex w-full px-5 mb-[24px]">
-        <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[1.4px] text-[#212529]">
-            女鞋
-        </div>
-    </div> -->
   <ShoeGender />
 
   <!--  -->
@@ -42,10 +36,6 @@
       <ShoeType />
 
       <Card />
-      <!-- <Running2View v-if="category === 'running'" />
-      <SkateboardingView v-if="category === 'skateboarding'" />
-      <LoafersView v-if="category === 'loafers'" />
-      <LimitedView v-if="category === 'limited'" /> -->
     </div>
   </div>
 
