@@ -3,7 +3,7 @@
         <h1 class="mx-auto">品牌故事</h1>
     </div> -->
     <div
-        class="benner h-[400px] relative w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px] max-sm:h-[375px]">
+        class="benner h-[400px] relative w-[calc(100%+24px)] m-[-12px] overflow-hidden mb-[64px] max-sm:mb-[40px] max-sm:h-[375px]">
         <div class="grid gap-y-[16px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-bold z-10 text-center">
             <div class="tw-headings-h1">品牌故事</div>
             <div class="tw-headings-h3">Brand Story</div>

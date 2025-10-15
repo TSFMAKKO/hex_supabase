@@ -3,7 +3,7 @@
         <h1 class="mx-auto">ProductDetailView id:{{ id }}</h1>
     </div>
     <div class="flex justify-center max-md:flex-col w-full gap-x-[24px]">
-        <div class="max-w-[746px] max-md:w-full">
+        <div class="max-w-[746px] max-md:w-full mb-[24px]">
             <!-- 桌機版 -->
             <ul class="grid grid-cols-2 gap-[8px] max-md:hidden">
                 <template v-for="img in productDetail.img[productIndex]">
@@ -26,7 +26,7 @@
             <!-- 手機板 -->
             <ul class="grid grid-cols-1 gap-[8px] md:hidden w-full">
                 <li class="bg-gray-400 w-full">
-                    <img class="w-full object-cover block" src="../assets/product-10.png" />
+                    <img class="w-full object-cover block" :src="productDetail.img[productIndex][0]" />
                 </li>
             </ul>
         </div>
@@ -108,8 +108,8 @@
                                     </template>
                                 </template>
                             </template>
-                            <div class="text-[#D74F4F] font-[400]">僅剩 {{ sizeStock }} 雙</div>
                         </div>
+                        <div class="text-[#D74F4F] font-[400]">僅剩 {{ sizeStock }} 雙</div>
                     </div>
                 </div>
                 <div class="flex gap-x-[8px]">

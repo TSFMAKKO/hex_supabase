@@ -3,30 +3,42 @@
     <h1 class="mx-auto">Index Page</h1>
   </div> -->
 
-  <div class="hidden max-sm:flex w-[calc(100vw-7px)] -mx-5">
-    <div class="h-[48px] w-[50%] text-[#212529] bg-[#E8FEC5] flex justify-center items-center">商品列表</div>
-    <div class="h-[48px] w-[50%] text-[#212529] bg-[#F5FEE7] flex justify-center items-center">品牌故事</div>
+  <div class="hidden max-sm:flex  w-[calc(100%+24px)] m-[-12px]">
+    <div class="h-[48px] w-[50%] text-[#212529] bg-[#E8FEC5] flex justify-center items-center">
+      <router-link to="/product">
+        商品列表
+      </router-link>
+    </div>
+    <div class="h-[48px] w-[50%] text-[#212529] bg-[#F5FEE7] flex justify-center items-center">
+      <router-link to="/story">
+        品牌故事
+      </router-link>
+    </div>
   </div>
 
-  <div class="benner relative max-sm:hidden w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px]">
+  <!-- 桌機 -->
+  <div class="benner relative max-sm:hidden  w-[calc(100%+24px)] m-[-12px] overflow-hidden mb-[64px] max-sm:mb-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner.png" alt="">
     <div class="absolute top-[50%] left-[200px] transform -translate-y-1/2 flex flex-col gap-y-[48px]">
       <div class=" text-[#fff] grid gap-y-[16px]">
         <div class="display-1">URBNSTEP</div>
         <div class="tw-headings-h3">Your Step, Your Statement</div>
       </div>
-      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+      <a href=""
+        class="py-[12px] px-[24px] bg-primary-300 inline-flex justify-center text-neutral-900 w-[120px]">立即選購</a>
     </div>
   </div>
 
-  <div class="benner relative sm:hidden w-[calc(100vw-7px)] -mx-5 overflow-hidden mb-[64px] max-sm:mb-[40px]">
+  <!-- 手機 -->
+  <div class="benner relative sm:hidden  w-[calc(100%+24px)] m-[-12px] overflow-hidden mb-[64px] max-sm:mb-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner-sm.png" alt="">
     <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
       <div class=" text-[#fff] grid gap-y-[16px]">
         <div class="display-1">URBNSTEP</div>
         <div class="tw-headings-h3">Your Step, Your Statement</div>
       </div>
-      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+      <a href=""
+        class="py-[12px] px-[24px] bg-primary-300 inline-flex justify-center text-neutral-900 w-[120px]">立即選購</a>
     </div>
   </div>
 
@@ -100,7 +112,7 @@
   </div>
 
   <!-- 下方benner -->
-  <!-- <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
+  <!-- <div class="relative  w-[calc(100%+24px)] m-[-12px] overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
     <img class="w-full max-w-none  " src="../assets/banner-co-branded.png" alt="">
     <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
       <div class=" text-[#fff] grid gap-y-[32px]">
@@ -115,13 +127,19 @@
 
   </div> -->
 
-  <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden max-sm:hidden py-[64px] max-sm:py-[40px]">
+  <!-- 桌 -->
+  <div class="relative  w-[calc(100%+24px)] m-[-12px] overflow-hidden max-sm:hidden py-[64px] max-sm:py-[40px]">
     <img class="w-full max-w-none" src="../assets/banner-co-branded.png" alt="">
     <div
       class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[clamp(20px,3vw,40px)] max-w-[1200px]">
       <div class="text-[#fff] grid gap-y-[clamp(6px,1vw,12px)]">
         <div class="grid gap-y-[clamp(3px,0.5vw,6px)]">
-          <div class="text-[clamp(1.5rem,3.5vw,3rem)] font-bold leading-tight">URBNSTEP x Kevin Chen</div>
+          <div class="text-[clamp(1.5rem,3.5vw,3rem)] font-bold leading-tight">URBNSTEP
+            <span class="max-sm:text-center text-primary-300 inline-flex items-center relative bottom-[4px]">
+              x
+            </span>
+            Kevin Chen
+          </div>
           <div class="text-[clamp(1rem,2vw,1.5rem)] font-semibold">跨界聯名，限量發售</div>
         </div>
         <div class="text-[clamp(0.875rem,1.2vw,1.125rem)] leading-relaxed">新銳漫畫家 Kevin Chen 親自操刀設計，街頭能量全面引爆！</div>
@@ -133,27 +151,33 @@
     </div>
   </div>
 
-
-  <div class="relative w-[calc(100vw-7px)] -mx-5 overflow-hidden py-[48px] max-sm:py-[24px] sm:hidden">
+  <!-- 手機 -->
+  <div class="relative w-[calc(100%+24px)] m-[-12px] overflow-hidden py-[48px] max-sm:py-[24px] sm:hidden">
     <img class="w-full max-w-none  " src="../assets/banner-co-branded-sm.png" alt="">
-    <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
-      <div class=" text-[#fff] grid gap-y-[16px]">
-        <div class="grid gap-y-[16px]">
+    <div
+      class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-y-[48px] max-sm:gap-y-[12px]">
+      <div class=" text-[#fff] grid gap-y-[16px] max-sm:gap-y-[4px]">
+        <div class="grid gap-y-[16px] max-sm:gap-y-[4px] text-center">
           <div class="tw-headings-h2">URBNSTEP</div>
-          <div class="tw-headings-h2">x</div>
+          <div class="tw-headings-h2 max-sm:text-center text-primary-300">x</div>
           <div class="tw-headings-h2">Kevin Chen</div>
-          <div class="tw-headings-h5">跨界聯名，限量發售</div>
+          <div class="tw-headings-h5 w-[160%]">跨界聯名，限量發售</div>
         </div>
-        <div class="tw-paragraph-md text-neutral-500">新銳漫畫家 Kevin Chen 親自操刀設計，街頭能量全面引爆！</div>
+
       </div>
-      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
+      <div class="tw-paragraph-md text-neutral-500 text-center w-[180%]">
+        <p>新銳漫畫家 Kevin Chen 親自操刀設計</p>
+        <p>街頭能量全面引爆！</p>
+      </div>
+      <a href=""
+        class="py-[12px] px-[24px] bg-primary-300 inline-flex justify-center w-[120px] text-neutral-900">立即選購</a>
     </div>
 
   </div>
 
   <!-- 依系列選購 -->
   <div class="flex flex-col gap-y-[16px] max-w-[1296px] w-[90%] max-sm:w-[100%] mx-auto py-[64px] max-sm:py-[40px]">
-    <div class="font-[700] text-[32px] leading-[1.2] tracking-[1.6px]">依系列選購</div>
+    <a href="" class="font-[700] text-[32px] leading-[1.2] tracking-[1.6px]">依系列選購</a>
     <!-- 卷軸容器（桌面：grid；小螢幕：水平滑動） -->
     <div class="max-sm:overflow-x-auto">
       <div class="grid grid-cols-4 max-sm:grid-cols-2 gap-x-[24px] w-full max-sm:gap-x-[12px] max-sm:gap-y-[12px]">

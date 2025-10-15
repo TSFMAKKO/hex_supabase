@@ -28,11 +28,11 @@
                 </div>
             </div>   -->
 
-            <div v-for="c in collects" :key="c.id" class="flex gap-x-[16px] border-b border-[#DEE2E6] pb-[32px] rounded-[4px]">
-                <div>
-                    <img :src="c.img" alt="?">
+            <div v-for="c in collects" :key="c.id" class="flex gap-x-[16px] w-full border-b border-[#DEE2E6] pb-[32px] rounded-[4px]">
+                <div class=" w-[120px] max-sm:w-[34.1%]">
+                    <img class="block" :src="c.img" :alt="c.img">
                 </div>
-                <div class="flex flex-col gap-y-[8px] w-full">
+                <div class="flex flex-col gap-y-[8px] w-full max-sm:w-[61.2%]">
                     <div class="font-[700] text-[20px] leading-[1.2] tracking-[1px]">{{ c.name }}</div>
                     <div><span class="mr-[12px] font-[400] text-[#6C757D]">尺寸</span><span>{{ c.size }}</span></div>
                     <div><span class="mr-[12px] font-[400] text-[#6C757D]">顏色</span><span>{{ c.color }}</span></div>
