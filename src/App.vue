@@ -48,7 +48,7 @@ import SaleSingup from './components/SaleSingup.vue';
   /* outline: 1px solid rgba(255, 0, 0, 0.1); */
 }
 body {
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: 'Mina', 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 5%;
