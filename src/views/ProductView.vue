@@ -26,7 +26,6 @@
     </div>
 
   </div>
-
   <ShoeGender />
 
   <!--  -->
@@ -38,13 +37,6 @@
       <Card />
     </div>
   </div>
-
-  <!-- <SaleSingup /> -->
-
-
-
-
-
 
 </template>
 
@@ -79,6 +71,7 @@ import { createClient } from '@supabase/supabase-js'
 import ShoeType from '../components/product/ShoeType.vue'
 import ShoeGender from '../components/product/ShoeGender.vue'
 
+// Supabase 設定
 const supabaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co'
 // 實務上不建議把 key 放在前端
 // 建議放在後端或 serverless functions
@@ -87,6 +80,7 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey)
 const imgBaseUrl = 'https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public'
 
+// 狀態管理
 const products = ref([])
 const loading = ref(true)
 const fetchError = ref(null)
@@ -101,11 +95,11 @@ import router from '../router';
 
 // 編輯
 const editHandler = (p) => {
-  console.log("products", products.value);
+  console.log('產品列表：', products.value)
   products.value.forEach(item => item.isEdit = false)
   p.isEdit = true
   tempEdit.value = { ...p }
-  console.log("tempEdit:", tempEdit.value);
+  console.log('暫存編輯資料：', tempEdit.value)
 
   EditId.value = p.id
 
@@ -113,6 +107,7 @@ const editHandler = (p) => {
 
 
 const saveHandler = async (p) => {
+  // 儲存商品變更（包含可能的圖片更新）
   // await updateProduct(tempEdit.value.id, tempEdit.value.title, tempEdit.value.price)
   let randomName = ""
   // 先判斷 selectedFile 是否有東西
@@ -123,13 +118,13 @@ const saveHandler = async (p) => {
 
   } else {
     const imgName = p.image_path?.split('/').pop() ?? ''
-    console.log("imgName", imgName);
+    console.log('圖檔檔名：', imgName)
 
     // 先刪除圖片
     deleteFile(imgName)
     // 上傳(修改)圖片(用隨機id之後再修改資料表)
     randomName = uuidv4() + '.jpg'
-    console.log("randomName", randomName);
+    console.log('新圖檔名稱：', randomName)
     upload(randomName)
     // 修改資料表
     await updateProduct({ id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price, image_path: `products-images/${randomName}` })
@@ -144,6 +139,7 @@ const saveHandler = async (p) => {
 
 
   // 修改前端(有修改圖片的話)
+  // 更新前端 products 陣列中的對應項目
   products.value = products.value.map((item) => {
     if (item.id === p.id) {
       let obj = {
@@ -156,13 +152,13 @@ const saveHandler = async (p) => {
       if (selectedFile.value) {
         obj = {
           id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
-          image_path: `${randomName}`,
+          image_path: `products-images/${randomName}`,
           src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
           isEdit: false
         }
       }
 
-      console.log("obj", obj);
+      console.log('更新後物件：', obj)
 
       return obj
     }
@@ -176,11 +172,12 @@ const saveHandler = async (p) => {
 
 // 刪除
 const delHandler = async (image_path, id) => {
+  // 刪除商品：包含刪除 Storage 檔案與 DB 紀錄
   if (!confirm('確定要刪除？')) return
 
   // 取出檔名（支援 path/filename.jpg 或 直接 filename.jpg）
   const imgName = image_path?.split('/').pop() ?? ''
-  console.log("imgName", imgName);
+  console.log('圖檔檔名：', imgName)
 
 
   try {
@@ -192,9 +189,9 @@ const delHandler = async (image_path, id) => {
       return
     }
 
-    console.log('刪除檔案成功', delData)
+  console.log('刪除檔案成功', delData)
 
-    if (!error) {
+    if (!delErr) {
       // 刪除 product 資料
       await deleteProduct(id)
 
@@ -212,12 +209,11 @@ const delHandler = async (image_path, id) => {
 
 // 選擇檔案
 const handleFile = (event) => {
+  // 接收使用者選擇的檔案
   selectedFile.value = event.target.files?.[0] ?? null
 }
 
-// 上傳檔案(成功)
 // 如果檔案名稱重複，可以加 { upsert: true } 覆蓋現有檔案：
-// .upload(selectedFile.value.name, selectedFile.value, { upsert: true })
 
 
 // ✅ Read - 讀取商品列表
@@ -255,6 +251,7 @@ const updateProduct = async ({ id, title, price, image_path }) => {
 // 繼續刪除product 表單資料(用id)
 // ✅ Delete - 刪除商品(procut表單)
 const deleteProduct = async (id) => {
+  // 刪除商品（資料表 products 中的紀錄）
   const { data, error } = await supabase
     .from('products')
     .delete()
@@ -268,13 +265,14 @@ const deleteProduct = async (id) => {
 // // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
 const getImgUrl = async (path) => {
+  // 產生圖片簽名網址（短效 60 秒）
   const { data, error } = await supabase.storage
     .from('products-images')
     .createSignedUrl(`${path}`, 60)
 
   if (!error) {
     const url = data.signedUrl
-    console.log(url)
+    console.log('簽名網址：', url)
     return url
   }
 
@@ -283,6 +281,7 @@ const getImgUrl = async (path) => {
 
 // 上傳檔案(成功)
 const uploadFile = async (file, name) => {
+  // 上傳檔案到 Storage（可覆蓋 upsert）
   const { data, error } = await supabase.storage
     .from('products-images')
     .upload(name, file, { upsert: true }) // 第一個參數是檔名，第二個是 File 物件 { upsert: true } 可複寫
@@ -293,6 +292,7 @@ const uploadFile = async (file, name) => {
 
 // 對應 template 的上傳按鈕：呼叫上面的 uploadFile helper
 const upload = async (name, id) => {
+  // 上傳流程（前端測試用途）
   if (!selectedFile.value) {
     alert('請先選擇檔案')
     return
@@ -328,6 +328,7 @@ const upload = async (name, id) => {
 
 // 列出 bucket 裡的檔案（方便確認 key）
 const listFiles = async (path = '') => {
+  // 列出 Storage 中的檔案（供除錯或後台管理用）
   const { data, error } = await supabase.storage
     .from('products-images')
     .list(path)
@@ -339,6 +340,7 @@ const listFiles = async (path = '') => {
 }
 
 const deleteFile = async (fileName) => {
+  // 自 Storage 刪除指定檔案
   const { data, error } = await supabase.storage
     .from('products-images')  // bucket 名稱
     .remove([fileName])       // 傳陣列，即使只刪一個檔案
@@ -356,13 +358,14 @@ const deleteFile = async (fileName) => {
 
 
 const refreshFiles = async () => {
+  // 重新讀取 Storage 檔案列表
   const res = await listFiles('')
   if (res.error) {
     console.error('refreshFiles error', res.error)
     alert(`列出檔案失敗：${res.error.message ?? res.error}`)
     return
   }
-  console.log('listFiles', res.data);
+  console.log('列出圖庫檔案：', res.data)
 
   files.value = res.data ?? []
 }
@@ -372,33 +375,37 @@ refreshFiles()
 
 
 onMounted(async () => {
+  // 初始化：讀取產品、處理圖片 URL、讀取使用者狀態與 Storage 列表
   loading.value = true
   fetchError.value = null
   try {
     const data = await getProducts()
-    products.value = data ?? []
-    // 處理圖片路徑
-    products.value = products.value.map(p => {
+    // 正常化 image_path：確保皆為 'products-images/<檔名>'
+    products.value = (data ?? []).map(p => {
+      const normalizedPath = p?.image_path?.startsWith('products-images/')
+        ? p.image_path
+        : `products-images/${p?.image_path ?? ''}`
       return {
         ...p,
-        src: `${imgBaseUrl}/${p.image_path}`
+        image_path: normalizedPath,
+        src: `${imgBaseUrl}/${normalizedPath}`
       }
     })
 
-    console.log('products', products.value)
+    console.log('產品列表：', products.value)
     try {
       const s = await supabase.auth.getSession()
-      console.log('session', s)
+      console.log('使用者 Session：', s)
       const u = await supabase.auth.getUser()
-      console.log('user', u)
+      console.log('使用者資料：', u)
     } catch (e) {
-      console.warn('get session/user failed (likely no session)', e)
+      console.warn('取得 session/user 失敗（可能尚未登入）', e)
     }
 
     try {
       await refreshFiles()
     } catch (e) {
-      console.warn('refreshFiles failed', e)
+      console.warn('刷新圖庫列表失敗', e)
     }
   } catch (err) {
     console.error('Failed to load products', err)

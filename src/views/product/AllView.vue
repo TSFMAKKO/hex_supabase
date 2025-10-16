@@ -24,27 +24,11 @@
     </div>
 
 
-    <!-- <div class="flex w-full px-5 mb-[24px]">
-        <div class="w-[1296px] m-0 mx-auto text-[28px] font-[700] leading-[120%] tracking-[1.4px] text-[#212529]">
-            女鞋
-        </div>
-    </div> -->
     <ShoeGender />
 
-    <!--  -->
-    <!-- text-[28px] font-[700] leading-[120%] tracking-[5%] -->
     <div class="flex w-full px-5 mb-[24px]">
         <div class="flex w-[1296px] m-0 mx-auto gap-[24px]">
-            <!-- <div
-                class="w-[196px] flex flex-col gap-y-[16px] max-sm:hidden leading-[150%] font-[500] text-[16px] tracking-[0.8px] text-[#212529]">
-                <div class="h-[48px] w-[172px] flex items-center text-[#57A203]">所有產品</div>
-                <div class="h-[48px] w-[172px] flex items-center">慢跑鞋</div>
-                <div class="h-[48px] w-[172px] flex items-center">滑板鞋</div>
-                <div class="h-[48px] w-[172px] flex items-center">後底鞋</div>
-                <div class="h-[48px] w-[172px] flex items-center">限定 / 聯名企劃</div>
-
-            </div> -->
-            <ShoeType />
+              <ShoeType />
 
 
             <div v-if="loading">載入中…</div>
@@ -111,8 +95,7 @@
                         <img class="w-[20px] h-[20px]" src="../../assets/right.png" alt="" srcset=""></img>
                     </a>
                 </div>
-                <!-- </div> -->
-                <!-- </div> -->
+              
 
             </div>
         </div>

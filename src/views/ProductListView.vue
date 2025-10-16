@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center">
+    <div class="flex justify-center items-center">
         <!-- <h1>Product List</h1> -->
         <div class="flex gap-x-5 mb-[60px]">
             <router-link to="/product/women/all"

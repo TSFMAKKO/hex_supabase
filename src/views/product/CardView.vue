@@ -175,7 +175,7 @@ const saveHandler = async (p) => {
             if (selectedFile.value) {
                 obj = {
                     id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
-                    image_path: `${randomName}`,
+                    image_path: `products-images/${randomName}`,
                     src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
                     // src2: `${imgPath}?t=${Date.now()}`,
                     isEdit: false
@@ -214,7 +214,7 @@ const delHandler = async (image_path, id) => {
 
         console.log('刪除檔案成功', delData)
 
-        if (!error) {
+        if (!delErr) {
             // 刪除 product 資料
             await deleteProduct(id)
 
@@ -453,12 +453,15 @@ onMounted(async () => {
     fetchError.value = null
     try {
         const data = await getProducts()
-        products.value = data ?? []
-        // 處理圖片路徑
-        products.value = products.value.map(p => {
+        // 正常化 image_path：確保皆為 'products-images/<檔名>'
+        products.value = (data ?? []).map(p => {
+            const normalizedPath = p?.image_path?.startsWith('products-images/')
+                ? p.image_path
+                : `products-images/${p?.image_path ?? ''}`
             return {
                 ...p,
-                src: `${imgBaseUrl}/${p.image_path}`
+                image_path: normalizedPath,
+                src: `${imgBaseUrl}/${normalizedPath}`
             }
         })
 
