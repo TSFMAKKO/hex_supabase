@@ -111,21 +111,6 @@
     </div>
   </div>
 
-  <!-- 下方benner -->
-  <!-- <div class="relative  w-[calc(100%+24px)] m-[-12px] overflow-hidden max-sm:hidden  py-[64px] max-sm:py-[40px]">
-    <img class="w-full max-w-none  " src="../assets/banner-co-branded.png" alt="">
-    <div class="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-y-[48px]">
-      <div class=" text-[#fff] grid gap-y-[32px]">
-        <div class="grid gap-y-[16px]">
-          <div class="display-2 max-xl:tw-headings-h2">URBNSTEP x Kevin Chen</div>
-          <div class="tw-headings-h2 max-xl:tw-headings-h6">跨界聯名，限量發售</div>
-        </div>
-        <div class="tw-paragraph-lg">新銳漫畫家 Kevin Chen 親自操刀設計，街頭能量全面引爆！</div>
-      </div>
-      <div class="py-[12px] px-[24px] bg-primary-300 inline-block text-neutral-900 w-[115px]">立即選購</div>
-    </div>
-
-  </div> -->
 
   <!-- 桌 -->
   <div class="relative  w-[calc(100%+24px)] m-[-12px] overflow-hidden max-sm:hidden py-[64px] max-sm:py-[40px]">

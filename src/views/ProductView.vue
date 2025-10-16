@@ -53,9 +53,7 @@ import { ref, onMounted, computed } from 'vue'
 
 import { useRoute } from 'vue-router'
 import Card from './product/CardView.vue'
-// import SaleSingup from '../components/SaleSingup.vue'
 const route = useRoute()
-// console.log(route.params.id) 
 
 const sex = computed(() => route.params.sex || 'all')
 console.log('sex:', sex.value)
@@ -77,9 +75,6 @@ const breadcrumb_type = computed(() => {
   }
 })
 
-// console.log(`${route.params.sex} / ${route.params.category}`);
-
-// import { supabase } from './lib/supabase'
 import { createClient } from '@supabase/supabase-js'
 import ShoeType from '../components/product/ShoeType.vue'
 import ShoeGender from '../components/product/ShoeGender.vue'
@@ -107,11 +102,7 @@ import router from '../router';
 // 編輯
 const editHandler = (p) => {
   console.log("products", products.value);
-
-  // 取消所有 isEdit 狀態
   products.value.forEach(item => item.isEdit = false)
-
-
   p.isEdit = true
   tempEdit.value = { ...p }
   console.log("tempEdit:", tempEdit.value);
@@ -153,11 +144,8 @@ const saveHandler = async (p) => {
 
 
   // 修改前端(有修改圖片的話)
-  // if (selectedFile.value) {
   products.value = products.value.map((item) => {
     if (item.id === p.id) {
-      //  src: `${imgBaseUrl}/${imgName}`
-
       let obj = {
         id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
         image_path: p.image_path,
@@ -165,13 +153,11 @@ const saveHandler = async (p) => {
         isEdit: false
       }
 
-      // const imgPath = await getImgUrl(`${randomName}`)
       if (selectedFile.value) {
         obj = {
           id: tempEdit.value.id, title: tempEdit.value.title, price: tempEdit.value.price,
           image_path: `${randomName}`,
           src: `${imgBaseUrl}/products-images/${randomName}?t=${Date.now()}`,
-          // src2: `${imgPath}?t=${Date.now()}`,
           isEdit: false
         }
       }
@@ -233,18 +219,6 @@ const handleFile = (event) => {
 // 如果檔案名稱重複，可以加 { upsert: true } 覆蓋現有檔案：
 // .upload(selectedFile.value.name, selectedFile.value, { upsert: true })
 
-// const upload = async () => {
-//   if (!selectedFile.value) {
-//     alert('請先選擇檔案')
-//     return
-//   }
-
-//   const { data, error } = await supabase.storage
-//     .from('products-images')
-//     .upload(selectedFile.value.name, selectedFile.value) // 傳 File 物件
-//   if (error) console.error('上傳失敗', error)
-//   else console.log('上傳成功', data)
-// }
 
 // ✅ Read - 讀取商品列表
 const getProducts = async () => {
@@ -290,15 +264,6 @@ const deleteProduct = async (id) => {
 }
 
 
-// 公開讀取(成功)
-// const { data } = supabase.storage
-//   .from('products-images')
-//   .getPublicUrl('1.jpg')
-
-// console.log(data.publicUrl) // 可直接用於 <img> 或 fetch
-
-
-
 // 讀取檔案
 // // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
@@ -318,8 +283,6 @@ const getImgUrl = async (path) => {
 
 // 上傳檔案(成功)
 const uploadFile = async (file, name) => {
-  // 不能用隨機名子 要用原先的名子
-  // const randomFileName = `${uuidv4()}.jpg`
   const { data, error } = await supabase.storage
     .from('products-images')
     .upload(name, file, { upsert: true }) // 第一個參數是檔名，第二個是 File 物件 { upsert: true } 可複寫
@@ -355,27 +318,12 @@ const upload = async (name, id) => {
     } else {
       alert('上傳完成 (測試)')
       selectedFile.value = null
-      // 清空 input[type=file] 的值（可選）
-      // document.querySelector('input[type="file"]').value = ''
-
-      // src: `${imgBaseUrl}/${imgName}`
-      // products.value = products.value.map(item => {
-      //   if (item.id === id) {
-      //     item.src = `${imgBaseUrl}/${name}?t=${Date.now()}`
-      //     return item
-      //   }
-      //   return item
-      // })
-      // console.log("products.value", products.value);
     }
   } catch (e) {
     console.error('upload handler error', e)
     alert(`上傳發生錯誤：${e?.message ?? e}`)
   }
 }
-
-// 覆蓋檔案(更新檔案)
-// await supabase.storage.from('products-images').upload('phone.jpg', newFile, { upsert: true })
 
 
 // 列出 bucket 裡的檔案（方便確認 key）
@@ -422,13 +370,6 @@ const refreshFiles = async () => {
 refreshFiles()
 
 
-// 範例：使用 <input type="file">
-// const file = document.querySelector('#fileInput').files[0]
-// uploadFile(file)
-
-
-// 把要v-for的資料要 map 出來處理
-// 回傳的時候 多一筆src = getImgUrl(item.id)
 
 onMounted(async () => {
   loading.value = true
@@ -445,7 +386,6 @@ onMounted(async () => {
     })
 
     console.log('products', products.value)
-    // 取得 session/user 與列出 bucket 檔案（安全地在生命週期內呼叫）
     try {
       const s = await supabase.auth.getSession()
       console.log('session', s)
@@ -469,20 +409,6 @@ onMounted(async () => {
 
 })
 
-// 
-// 範例：新增三筆商品
-// await addProduct('手機', 20000)
-// await addProduct('筆記型電腦', 36000)
-// await addProduct('耳機', 3000)
-
-
-// 範例：更新 id=2 的商品
-// await updateProduct(2, '筆電', 35000)
-
-
-
-// 範例：刪除 id=3 的商品
-// await deleteProduct(3)
 
 
 </script>

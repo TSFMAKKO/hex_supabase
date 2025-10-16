@@ -1,9 +1,5 @@
 
 import { createRouter, createWebHashHistory } from 'vue-router';
-// import route from '../store/route';
-
-// import { useRoute } from 'vue-router';
-// const route = useRoute();
 
 import Index from '../views/Index.vue';
 import Test from '../views/TestView.vue';
@@ -58,37 +54,13 @@ const routes = [
     meta: { title: '收藏頁' },
 
   },
-
-  // {
-  //   path: '/product/:sex/all',
-  //   name: 'ProductAll',
-  //   component: Product,
-  //   // meta: { title: '男鞋 - 所有產品' },
-
-  // },
   {
     path: '/product/:sex/:category',
     name: 'ProductCategory',
     component: Product,
-    // meta will be set dynamically in afterEach (fallback provided)
     meta: { title: '商品分類' },
 
   },
-  // category
-  // {
-  //   path: '/product/women/all',
-  //   name: 'ProductWomenAll',
-  //   component: Product,
-  //   meta: { title: '女鞋 - 所有產品' },
-
-  // },
-  // {
-  //   path: '/product/:sex/running',
-  //   name: 'ProductRunning',
-  //   component: import('../views/product/RunningView.vue'),
-  //   // meta: { title: '男鞋 - 跑鞋' },
-
-  // },
   {
     path: '/productDeteil/:id',
     name: 'ProductDeteil',
@@ -151,7 +123,6 @@ router.afterEach((to) => {
       document.title = to.meta?.title || 'Hex'
     }
   } catch (e) {
-    // defensive: 不要讓設定 title 的錯誤中斷路由
     console.warn('failed to set document.title', e)
   }
 })

@@ -53,6 +53,7 @@ body {
   line-height: 1.5;
   letter-spacing: 5%;
   color: #212529;
+  overflow-y: scroll;
 }
 
 

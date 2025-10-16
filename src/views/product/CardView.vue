@@ -23,7 +23,7 @@
             class="products-list w-full flex content-stretch flex-wrap gap-x-[24px] max-sm:gap-x-[12px] gap-y-[48px] max-sm:gap-y-[24px] !mt-[0px] mb-[48px]">
             <li v-for="p in products" :key="p.id"
                 class="product w-[calc(33.3%-16px)] max-sm:w-[calc(50%-6px)] h-[342px] 
-                    flex flex-wrap items-stretch  !border-b-0
+                    flex flex-wrap !border-b-0
                 ">
                 <template v-if="p?.isEdit === false || p?.isEdit === undefined">
                     <!-- <router-link :to="`/productDeteil/${p.id}`"> -->

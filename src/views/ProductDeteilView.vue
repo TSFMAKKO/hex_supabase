@@ -11,16 +11,6 @@
                         <img :src="`${img}`" :key="img" />
                     </li>
                 </template>
-
-                <!-- <li class="bg-gray-400">
-                    <img src="../assets/product-10.png" />
-                </li>
-                <li class="bg-gray-400">
-                    <img src="../assets/product-11.png" />
-                </li>
-                <li class="bg-gray-400">
-                    <img src="../assets/product-10.png" />
-                </li> -->
             </ul>
 
             <!-- 手機板 -->
@@ -231,7 +221,6 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 // import SaleSingup from '../components/SaleSingup.vue';
 const route = useRoute();
-// console.log(route.params.id)  // '123'
 
 const id = ref(route.params.id);
 console.log("id:", route.params.id);

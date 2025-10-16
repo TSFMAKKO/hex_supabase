@@ -193,12 +193,6 @@ const saveHandler = async (p) => {
 
     }
 
-
-
-
-
-
-
     // 修改前端(有修改圖片的話)
     // if (selectedFile.value) {
     products.value = products.value.map((item) => {
