@@ -19,8 +19,7 @@
       <span>
         <span v-if="sex === 'women'">女</span>
         <span v-else-if="sex === 'men'">男</span>
-        鞋</span
-      >
+        鞋</span>
 
       <span>/</span>
       <span class="text-[#343A40]">{{ breadcrumb_type }}</span>
@@ -66,18 +65,12 @@ const breadcrumb_type = computed(() => {
   }
 });
 
-import { createClient } from "@supabase/supabase-js";
 import ShoeType from "../components/product/ShoeType.vue";
 import ShoeGender from "../components/product/ShoeGender.vue";
+import supabase from "../lib/supabaseClient";
 
-// Supabase 設定
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "";
-// 實務上不建議把 key 放在前端
-// 建議放在後端或 serverless functions
-// 這裡用 supabaseKey 只是為了示範
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseKey);
 const imgBaseUrl = "https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public";
+
 
 // 狀態管理
 const products = ref([]);
@@ -316,6 +309,20 @@ const listFiles = async (path = "") => {
     return { data: null, error };
   }
   return { data, error: null };
+};
+
+// 刷新圖庫列表（避免 refreshFiles 未定義導致錯誤）
+const refreshFiles = async () => {
+  try {
+    const { data, error } = await listFiles("");
+    if (error) {
+      console.warn("刷新圖庫列表失敗", error);
+      return;
+    }
+    files.value = Array.isArray(data) ? data : [];
+  } catch (e) {
+    console.warn("刷新圖庫列表例外", e);
+  }
 };
 
 const deleteFile = async (fileName) => {
