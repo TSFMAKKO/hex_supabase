@@ -67,7 +67,7 @@ const breadcrumb_type = computed(() => {
 
 import ShoeType from "../components/product/ShoeType.vue";
 import ShoeGender from "../components/product/ShoeGender.vue";
-import supabase from "../lib/supabaseClient";
+import { supabase, addProduct, updateProduct, deleteProduct, getImgUrl, uploadFile, listFiles, refreshFiles, deleteFile } from "../lib/supabaseClient";
 
 const imgBaseUrl = "https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public";
 
@@ -214,59 +214,59 @@ const getProducts = async () => {
 };
 
 // ✅ Create - 新增商品
-const addProduct = async (title, price) => {
-  const { data, error } = await supabase.from("products").insert([{ title, price }]);
-  if (error) throw error;
-  return data;
-};
+// const addProduct = async (title, price) => {
+//   const { data, error } = await supabase.from("products").insert([{ title, price }]);
+//   if (error) throw error;
+//   return data;
+// };
 
 // ✅ Update - 更新商品名稱與價格
-const updateProduct = async ({ id, title, price, image_path }) => {
-  const { data, error } = await supabase
-    .from("products")
-    .update({ title, price, image_path })
-    .eq("id", id);
-  if (error) throw error;
-  return data;
-};
+// const updateProduct = async ({ id, title, price, image_path }) => {
+//   const { data, error } = await supabase
+//     .from("products")
+//     .update({ title, price, image_path })
+//     .eq("id", id);
+//   if (error) throw error;
+//   return data;
+// };
 
 // 抓取product 圖庫位置
 // 刪除圖庫 假如回傳成功
 // 繼續刪除product 表單資料(用id)
 // ✅ Delete - 刪除商品(procut表單)
-const deleteProduct = async (id) => {
-  // 刪除商品（資料表 products 中的紀錄）
-  const { data, error } = await supabase.from("products").delete().eq("id", id);
-  if (error) throw error;
-  return data;
-};
+// const deleteProduct = async (id) => {
+//   // 刪除商品（資料表 products 中的紀錄）
+//   const { data, error } = await supabase.from("products").delete().eq("id", id);
+//   if (error) throw error;
+//   return data;
+// };
 
 // 讀取檔案
 // // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/
 // https://uvjpgijmjbpbhwqrhvrg.supabase.co/storage/v1/object/public/products-images/inspiration-1.png
-const getImgUrl = async (path) => {
-  // 產生圖片簽名網址（短效 60 秒）
-  const { data, error } = await supabase.storage
-    .from("products-images")
-    .createSignedUrl(`${path}`, 60);
+// const getImgUrl = async (path) => {
+//   // 產生圖片簽名網址（短效 60 秒）
+//   const { data, error } = await supabase.storage
+//     .from("products-images")
+//     .createSignedUrl(`${path}`, 60);
 
-  if (!error) {
-    const url = data.signedUrl;
-    console.log("簽名網址：", url);
-    return url;
-  }
-};
+//   if (!error) {
+//     const url = data.signedUrl;
+//     console.log("簽名網址：", url);
+//     return url;
+//   }
+// };
 
 // 上傳檔案(成功)
-const uploadFile = async (file, name) => {
-  // 上傳檔案到 Storage（可覆蓋 upsert）
-  const { data, error } = await supabase.storage
-    .from("products-images")
-    .upload(name, file, { upsert: true }); // 第一個參數是檔名，第二個是 File 物件 { upsert: true } 可複寫
-  if (error) console.error("上傳失敗", error);
-  else console.log("上傳成功", data);
-  return { data, error };
-};
+// const uploadFile = async (file, name) => {
+//   // 上傳檔案到 Storage（可覆蓋 upsert）
+//   const { data, error } = await supabase.storage
+//     .from("products-images")
+//     .upload(name, file, { upsert: true }); // 第一個參數是檔名，第二個是 File 物件 { upsert: true } 可複寫
+//   if (error) console.error("上傳失敗", error);
+//   else console.log("上傳成功", data);
+//   return { data, error };
+// };
 
 // 對應 template 的上傳按鈕：呼叫上面的 uploadFile helper
 const upload = async (name, id) => {
@@ -301,44 +301,44 @@ const upload = async (name, id) => {
 };
 
 // 列出 bucket 裡的檔案（方便確認 key）
-const listFiles = async (path = "") => {
-  // 列出 Storage 中的檔案（供除錯或後台管理用）
-  const { data, error } = await supabase.storage.from("products-images").list(path);
-  if (error) {
-    console.error("listFiles error", error);
-    return { data: null, error };
-  }
-  return { data, error: null };
-};
+// const listFiles = async (path = "") => {
+//   // 列出 Storage 中的檔案（供除錯或後台管理用）
+//   const { data, error } = await supabase.storage.from("products-images").list(path);
+//   if (error) {
+//     console.error("listFiles error", error);
+//     return { data: null, error };
+//   }
+//   return { data, error: null };
+// };
 
 // 刷新圖庫列表（避免 refreshFiles 未定義導致錯誤）
-const refreshFiles = async () => {
-  try {
-    const { data, error } = await listFiles("");
-    if (error) {
-      console.warn("刷新圖庫列表失敗", error);
-      return;
-    }
-    files.value = Array.isArray(data) ? data : [];
-  } catch (e) {
-    console.warn("刷新圖庫列表例外", e);
-  }
-};
+// const refreshFiles = async () => {
+//   try {
+//     const { data, error } = await listFiles("");
+//     if (error) {
+//       console.warn("刷新圖庫列表失敗", error);
+//       return;
+//     }
+//     files.value = Array.isArray(data) ? data : [];
+//   } catch (e) {
+//     console.warn("刷新圖庫列表例外", e);
+//   }
+// };
 
-const deleteFile = async (fileName) => {
-  // 自 Storage 刪除指定檔案
-  const { data, error } = await supabase.storage
-    .from("products-images") // bucket 名稱
-    .remove([fileName]); // 傳陣列，即使只刪一個檔案
+// const deleteFile = async (fileName) => {
+//   // 自 Storage 刪除指定檔案
+//   const { data, error } = await supabase.storage
+//     .from("products-images") // bucket 名稱
+//     .remove([fileName]); // 傳陣列，即使只刪一個檔案
 
-  if (error) {
-    console.error("刪除失敗", error);
-  } else {
-    console.log("刪除成功", data);
-  }
+//   if (error) {
+//     console.error("刪除失敗", error);
+//   } else {
+//     console.log("刪除成功", data);
+//   }
 
-  return { data, error };
-};
+//   return { data, error };
+// };
 
 // deleteFile("1.jpg") // 測試刪除檔案
 
